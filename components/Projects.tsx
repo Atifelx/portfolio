@@ -36,7 +36,7 @@ const projectsData = [
   {
     title: "Clever Chat",
     status: "Production",
-    links: { "Demo": "#" },
+    links: { "Demo": "https://agent-live-vpbp.vercel.app/" },
     description: "A RAG chatbot that allows users to upload PDF and DOCX files to a database and ask questions about the documents. If an answer isn't in the database, the agent uses live search to find it. Demonstrates skills in LangChain, RAG, vector databases, Embedding APIs, LLMs, OpenRouter, and multi-agent orchestrations.",
     tech: ["Python", "LangChain", "Vector Databases", "LLM APIs"],
     gradient: "from-blue-500/20 to-cyan-500/20",
@@ -45,7 +45,7 @@ const projectsData = [
   {
     title: "CryptoClever",
     status: "Under Development",
-    links: { "Web": "http://4.213.225.24:3000/" },
+    links: { "Web": "http://4.213.225.24:3000/?nocache=1774121094931" },
     description: "A trading signal platform for crypto utilizing a Fibonacci algorithm (originally Python, translated to TypeScript) and the Binance Free API for real-time live signal chart movements. It calculates candles algorithmically to suggest next movements, while RAG is used to backtest past candles. Forex pairs are upcoming. Deployed to Azure using GitHub Actions CI/CD pipelines.",
     tech: ["TypeScript", "Python", "Binance API", "Azure", "GitHub Actions"],
     gradient: "from-rose-500/20 to-pink-500/20",

@@ -10,7 +10,7 @@ export default function Footer() {
           
           <div className="flex space-x-6">
             <a 
-              href="https://github.com/aatif-shaikh" 
+              href="https://github.com/Atifelx" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="p-3 bg-white hover:bg-gray-200 transition-colors rounded-full shadow-[0_0_15px_rgba(255,255,255,0.2)] group"
@@ -21,7 +21,7 @@ export default function Footer() {
               </svg>
             </a>
             <a 
-              href="https://linkedin.com/in/aatif-shaikh" 
+              href="https://www.linkedin.com/in/atif-shaikh/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="p-3 bg-[#0077b5] hover:bg-[#005e93] transition-colors rounded-full shadow-[0_0_15px_rgba(0,119,181,0.4)] group"
