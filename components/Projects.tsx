@@ -1,10 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Github, ArrowUpRight, X } from "lucide-react";
 import clsx from "clsx";
+import { useState, useEffect } from "react";
 
 const projectsData = [
+  {
+    title: "Healthcare Automation System",
+    status: "Production",
+    links: {},
+    image: "/n8n.png",
+    description: "A full-scale automation system for healthcare customers using LLMs, Agentic RAG, and an intelligent chatbot. The system monitors health scores daily and triggers automated alerts if scores fall below defined thresholds, providing a fully production-ready solution.",
+    tech: ["n8n", "LLM", "Agentic RAG", "AI Agents", "Chatbot"],
+    gradient: "from-cyan-500/20 to-blue-500/20",
+    border: "group-hover:border-cyan-500/50"
+  },
   {
     title: "WriteBookAI",
     status: "Live Production",
@@ -54,6 +65,26 @@ const projectsData = [
 ];
 
 export default function Projects() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
+
+  // Prevent scrolling when modal is open
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [selectedImage]);
+
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -145,6 +176,24 @@ export default function Projects() {
                   </div>
                 </div>
 
+                {project.image && (
+                  <div 
+                    className="mb-6 rounded-xl overflow-hidden border border-white/10 group/img relative cursor-zoom-in"
+                    onClick={() => setSelectedImage(project.image as string)}
+                  >
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-auto object-cover transition-transform duration-500 group-hover/img:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="text-white text-xs font-mono bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 transform translate-y-4 group-hover/img:translate-y-0 transition-transform duration-300">
+                        Click to enlarge
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 <p className="text-gray-400 leading-relaxed mb-6 flex-grow">
                   {project.description}
                 </p>
@@ -167,6 +216,47 @@ export default function Projects() {
           ))}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-10 cursor-zoom-out"
+          >
+            <motion.button
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-[110]"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <X size={24} />
+            </motion.button>
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-7xl w-full h-full flex items-center justify-center p-2"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage}
+                alt="Zoomed project view"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/10"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -39,7 +39,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-gradient"
           >
-            I build AI for the enterprise.
+            I build AI systems for the enterprise.
           </motion.h2>
 
           <motion.p
@@ -48,7 +48,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl leading-relaxed"
           >
-            I'm a <span className="text-white font-medium">Forward Deployed Engineer</span> based in Mumbai. With 10 years of experience spanning software development and client coordination, I specialize in deploying intelligent, scalable AI solutions remotely.
+            I’m a <span className="text-white font-medium">Forward-Deployed Software Engineer</span> with <span className="text-white font-medium">10+ years of experience</span>, including <span className="text-white font-medium">5+ years building AI-driven systems</span>. I specialize in translating complex business problems into <span className="text-white font-medium">scalable, production-grade solutions</span>—designing and shipping end-to-end SaaS platforms, custom AI agents, and LLM-powered automation systems.
           </motion.p>
 
           <motion.div

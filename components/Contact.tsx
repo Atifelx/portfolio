@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MessageSquare } from "lucide-react";
+import { Mail, MessageSquare, Video, ExternalLink } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -21,36 +21,54 @@ export default function Contact() {
           <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tighter text-white">
             Get In Touch
           </h2>
-          <div className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 space-y-6 leading-relaxed text-left">
+          <div className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-16 space-y-6 leading-relaxed text-left">
             <p>
               I'm currently exploring new opportunities to design and deploy AI-driven solutions for enterprise clients. If you have a project in mind, a question, or simply want to connect, feel free to reach out.
             </p>
             <p>
               📧 Email: <a href="mailto:aatif2003@gmail.com" className="text-white hover:text-teal-400 transition-colors font-medium">aatif2003@gmail.com</a>
             </p>
-            <p>
-              I'm comfortable working both <span className="text-white font-medium">independently and in collaborative team environments</span>, and I'm flexible with timelines to accommodate project needs. I actively seek <span className="text-white font-medium">challenging projects that push technical boundaries</span>, with a growing focus on <span className="text-white font-medium">Web3 technologies and AI agent automation for industry-scale applications</span>.
-            </p>
-            <p>
-              If you'd like to evaluate my capabilities before committing, I'm open to <span className="text-white font-medium">test projects with defined timelines</span>. Deliverables speak louder than words—once you see the quality and reliability of my work, we can explore long-term collaboration.
-            </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            {/* Email Option */}
+            <div className="flex flex-col gap-3 group">
+              <a
+                href="mailto:aatif2003@gmail.com"
+                className="flex flex-col items-center justify-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-teal-400/50 hover:-translate-y-1"
+              >
+                <Mail size={32} className="text-teal-400 mb-4 group-hover:scale-110 transition-transform" />
+                <span className="text-white font-bold mb-1">Email Me</span>
+                <span className="text-gray-500 text-xs font-mono">App Client</span>
+              </a>
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=aatif2003@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] text-gray-500 hover:text-teal-400 transition-colors font-mono flex items-center justify-center gap-1 uppercase tracking-widest"
+              >
+                Open in Gmail <ExternalLink size={10} />
+              </a>
+            </div>
+
+            {/* Booking Option */}
             <a
-              href="mailto:aatif2003@gmail.com"
-              className="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-white bg-white/10 backdrop-blur border border-white/20 rounded-lg overflow-hidden transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:shadow-[0_0_30px_rgba(45,212,191,0.2)]"
+              href="mailto:aatif2003@gmail.com?subject=Google%20Meet%20Discovery%20Call%20Request&body=Hi%20Atif,%0A%0AI'd%20like%20to%20schedule%20a%20Google%20Meet%20call%20to%20discuss%20a%20potential%20project.%20Please%20let%20me%20know%20your%20availability.%0A%0ABest%20regards,"
+              className="flex flex-col items-center justify-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-purple-400/50 hover:-translate-y-1 group"
             >
-              <Mail size={24} className="mr-3 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-              <span>Say Hello</span>
+              <Video size={32} className="text-purple-400 mb-4 group-hover:scale-110 transition-transform" />
+              <span className="text-white font-bold mb-1">Book a Meet</span>
+              <span className="text-gray-500 text-xs font-mono text-center">Via Email (No Signup)</span>
             </a>
-            
+
+            {/* Quick Chat Option */}
             <a
               href="tel:+919769550173"
-              className="group inline-flex items-center justify-center px-10 py-5 font-bold text-gray-300 rounded-lg transition-all duration-300 hover:text-white hover:bg-white/5"
+              className="flex flex-col items-center justify-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:border-blue-400/50 hover:-translate-y-1 group"
             >
-              <MessageSquare size={24} className="mr-3 text-teal-400" />
-              <span>+91 97695 50173</span>
+              <MessageSquare size={32} className="text-blue-400 mb-4 group-hover:scale-110 transition-transform" />
+              <span className="text-white font-bold mb-1">Quick Chat</span>
+              <span className="text-gray-500 text-xs font-mono">+91 97695 50173</span>
             </a>
           </div>
         </motion.div>

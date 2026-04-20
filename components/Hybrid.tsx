@@ -58,41 +58,11 @@ export default function Hybrid() {
               The Rare Skill Advantage: Bridging Hardware Systems & AI Software
             </h3>
             
-            <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
-              <p>
-                In today's tech landscape, <span className="font-bold text-white">99% of engineers are either strictly software or strictly hardware</span>. My defining competitive advantage is the proven ability to seamlessly bridge both worlds.
-              </p>
-              
-              <p>
-                Early in my career, I spent years architecting low-level hardware control systems utilizing <span className="text-teal-400 font-mono text-sm px-2 py-0.5 bg-teal-400/10 rounded">Raspberry Pi</span> and <span className="text-purple-400 font-mono text-sm px-2 py-0.5 bg-purple-400/10 rounded">ESP8266</span> platforms. I built solutions where complex software logic orchestrated physical devices in real-time. Today, as my primary focus has evolved to AI-powered SaaS platforms and enterprise cloud architecture, this deep-rooted hardware foundation provides me with an <span className="text-amber-400 font-semibold italic">unmatched perspective</span>.
-              </p>
-
-              <p className="text-white font-bold pt-4 text-xl">
-                I don't just build software—I architect <span className="text-teal-400 underline decoration-teal-400/30 underline-offset-4">End-to-End Intelligent Ecosystems</span>:
-              </p>
-              
-              <ul className="space-y-4 font-mono text-sm tracking-wide bg-gradient-to-br from-white/5 to-transparent p-6 rounded-xl border border-white/10 shadow-inner">
-                <li className="flex items-start">
-                  <span className="text-purple-400 mr-3 mt-0.5 text-lg">▹</span>
-                  <span className="leading-relaxed"><strong className="text-white">Edge Computing & IoT:</strong> Embedded devices natively collecting and transmitting physical telemetry.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-400 mr-3 mt-0.5 text-lg">▹</span>
-                  <span className="leading-relaxed"><strong className="text-white">Scalable Cloud Architecture:</strong> Distributed SaaS platforms dynamically managing global device fleets.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-teal-400 mr-3 mt-0.5 text-lg">▹</span>
-                  <span className="leading-relaxed"><strong className="text-white">Generative AI & LLMs:</strong> Foundation models analyzing real-world data to automate mission-critical decisions.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-amber-400 mr-3 mt-0.5 text-lg">▹</span>
-                  <span className="leading-relaxed"><strong className="text-white">Bi-Directional Command:</strong> Cloud platforms executing complex logic to manipulate hardware states instantaneously.</span>
-                </li>
-              </ul>
-
-              <p className="pt-6 font-medium text-gray-300 border-t border-white/10 mt-8">
-                Recruiting an engineer who operates effortlessly across <span className="text-white font-semibold flex-inline items-center gap-1">Device-level C++ <Cpu size={16} className="inline text-teal-400 mb-1" /></span>, <span className="text-white font-semibold">Scalable Node.js Backends</span>, and <span className="text-white font-semibold">LLM Orchestration Pipelines</span> guarantees solutions that are robust, holistic, and technically superior from the ground up.
-              </p>
+            <div className="text-gray-200 text-xl md:text-2xl leading-relaxed font-medium">
+              Software Engineer specializing in AI-driven SaaS systems with a background in{" "}
+              <span className="text-teal-400">embedded and IoT platforms;</span> build{" "}
+              <span className="text-purple-400 font-bold italic">end-to-end architectures</span>{" "}
+              across device-level control, scalable cloud systems, and LLM pipelines, enabling real-time, data-driven automation at scale—translating ambiguous customer problems into production-grade solutions.
             </div>
           </div>
 

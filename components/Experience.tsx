@@ -5,45 +5,45 @@ import { Briefcase, Calendar } from "lucide-react";
 
 const experienceData = [
   {
-    title: "Software Engineer",
-    company: "Enterprise AI Solutions | LTIMindtree",
+    title: "Software Engineer – Enterprise AI Solutions",
+    company: "LTIMindtree",
     date: "Dec 2024 – Present",
     points: [
-      "Work remotely with European enterprise clients deploying AI solutions",
-      "Deployed Azure OpenAI + Microsoft Graph API automation; eliminated 60% manual processing for 200+ daily users",
-      "Built production RAG chatbot reducing inventory analysis from 2+ hours to under 30 seconds with 85% accuracy",
-      "Collaborate with sales on pre-sales technical evaluations"
+      "Led discovery from raw customer problems to MVP, translating requirements into end-to-end AI systems and shipping production solutions across time zones",
+      "Forward-deployed engineer embedding with clients; built end-to-end CRM automation using n8n over raw customer data, integrating Azure OpenAI, Microsoft Graph, OAuth2, and Azure AD; deployed RAG-based voice chatbot for real-time inventory insights, reducing manual workflows by 35%"
     ]
   },
   {
-    title: "Software Engineer",
-    company: "Enterprise M365 | Sherweb",
+    title: "Developer (Contract)",
+    company: "Client: Upwork",
+    date: "Jan 2024 – Aug 2024 | Remote",
+    points: [
+      "Built RAG-based sales chatbot over 13K inventory, driving demand forecasting and stock optimization; improved sell-through efficiency by 30%"
+    ]
+  },
+  {
+    title: "Software Engineer – Enterprise M365",
+    company: "Sherweb",
     date: "Nov 2021 – Nov 2023 | Remote",
     points: [
-      "Provided technical support to enterprise customers on M365 platform maintaining 99.5% uptime SLA",
-      "SEV-A incident response expert; restored services within 2-hour SLA",
-      "Built monitoring tool reducing detection time by 45%"
+      "Forward-deployed engineer embedding with enterprise clients; built reliability and automation for M365 (Exchange, SharePoint, Teams, Azure AD), sustaining 99.5% SLA and leading SEV-A recoveries with engineering",
+      "Built Intune + Graph API monitoring with Teams webhook-based alerting (-45% detection time); developed React/PostgreSQL ticketing system (-35% response time)"
     ]
   },
   {
-    title: "Developer (Freelance)",
-    company: "Upwork",
+    title: "Software Engineer (Contract)",
+    company: "Client: Upwork",
     date: "Dec 2019 – Aug 2020 | $20K+ earned | Remote",
     points: [
-      "Delivered M365 support for 15+ enterprise clients",
-      "Built e-commerce solutions (React, WordPress/WooCommerce)",
-      "Developed SEO-optimized landing pages improving conversion rates",
-      "$20K+ earned delivering successful projects"
+      "Built and deployed full-stack solutions for 15+ enterprise clients across M365 and e-commerce (React, WordPress/WooCommerce); integrated payments and analytics, driving measurable conversion improvements"
     ]
   },
   {
     title: "Technical Operations & Client Coordination",
     company: "Etisalat",
-    date: "Nov 2013 – Oct 2019 | Dubai, UAE",
+    date: "Nov 2013 – Oct 2019 | Dubai, UAE | Onsite",
     points: [
-      "Managed client coordination across 3 engineering teams for telecommunications infrastructure",
-      "Coordinated incident response managing triage and escalation workflows",
-      "Primary liaison between technical teams and enterprise clients"
+      "Managed client coordination and negotiations across 3 engineering teams for telecommunications infrastructure; provided live customer support resolving escalations and service issues"
     ]
   }
 ];
