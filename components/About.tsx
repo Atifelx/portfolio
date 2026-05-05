@@ -92,7 +92,7 @@ export default function About() {
     }
   };
 
-  const skillVariants = (glowColor: string) => ({
+  const skillVariants = (glowColor: string): any => ({
     initial: { boxShadow: "0 0 0px rgba(0,0,0,0)", scale: 1 },
     hover: {
       boxShadow: [
@@ -103,7 +103,7 @@ export default function About() {
       scale: [1, 1.15, 1],
       transition: {
         duration: 0.6,
-        ease: "easeInOut"
+        ease: [0.4, 0, 0.2, 1]
       }
     }
   });
