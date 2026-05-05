@@ -62,7 +62,7 @@ export default function Experience() {
           className="mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 font-mono">
-            <span className="text-teal-400 mr-2">02.</span> Experience
+            <span className="text-teal-400 mr-2">03.</span> Experience
           </h2>
           <p className="text-gray-400 text-lg">A decade of engineering, client coordination, and delivering impact.</p>
         </motion.div>

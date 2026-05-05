@@ -1,262 +1,174 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
-import { useState, useEffect } from "react";
 
 const projectsData = [
   {
-    title: "Healthcare Automation System",
+    title: "Healthcare AI Automation",
     status: "Production",
     links: {},
     image: "/n8n.png",
-    description: "A full-scale automation system for healthcare customers using LLMs, Agentic RAG, and an intelligent chatbot. The system monitors health scores daily and triggers automated alerts if scores fall below defined thresholds, providing a fully production-ready solution.",
-    tech: ["n8n", "LLM", "Agentic RAG", "AI Agents", "Chatbot"],
+    description: "A full-scale automation system for healthcare enterprise customers using LLMs, Agentic RAG, and intelligent n8n workflows. The system monitors health scores daily and triggers automated alerts if scores fall below defined thresholds.",
+    tech: ["n8n", "LLM", "Agentic RAG", "AI Agents", "Python"],
     gradient: "from-cyan-500/20 to-blue-500/20",
-    border: "group-hover:border-cyan-500/50"
-  },
-  {
-    title: "WriteBookAI",
-    status: "Live Production",
-    links: { "Web": "http://writebookai.com" },
-    description: "Built to overcome writer's block, this platform generates 95%+ human-quality output that can be directly published on Amazon Kindle. It uses the Gemini API for production-grade, multiple orchestrations to create a complete book from a user prompt, specifically designed for Amazon Kindle authors.",
-    users: "50+ active non-fiction authors",
-    tech: ["React", "Node.js", "PostgreSQL", "Gemini", "Stripe"],
-    gradient: "from-purple-500/20 to-blue-500/20",
-    border: "group-hover:border-purple-500/50"
-  },
-  {
-    title: "Blago AI",
-    status: "Production",
-    links: { "App Landing": "https://seo-ai-eppw.vercel.app/", "Dashboard": "https://seo-ai-eppw.vercel.app/tester-login" },
-    description: "Writes SEO-friendly articles based on user-provided keywords and topics. It generates human-style content using an inbuilt humanizer and SEO algorithm while targeting main keywords. Users can edit the generated content and directly publish it to WordPress from within the application.",
-    tech: ["Google Gemini", "React", "WordPress API"],
-    gradient: "from-teal-500/20 to-emerald-500/20",
-    border: "group-hover:border-teal-500/50"
-  },
-  {
-    title: "CVStudio.org",
-    status: "Open Source",
-    links: { "Web": "https://cvstudio.org" },
-    description: "A 100% free and open-source platform built to help candidates get their resumes shortlisted. It uses the most approachable ATS format online, without relying on AI. Users can paste content from an AI, instantly modify it, and export to PDF or DOCX.",
-    tech: ["Next.js", "TailwindCSS"],
-    gradient: "from-orange-500/20 to-amber-500/20",
-    border: "group-hover:border-orange-500/50"
-  },
-  {
-    title: "Clever Chat",
-    status: "Production",
-    links: { "Demo": "https://agent-live-vpbp.vercel.app/" },
-    description: "A RAG chatbot that allows users to upload PDF and DOCX files to a database and ask questions about the documents. If an answer isn't in the database, the agent uses live search to find it. Demonstrates skills in LangChain, RAG, vector databases, Embedding APIs, LLMs, OpenRouter, and multi-agent orchestrations.",
-    tech: ["Python", "LangChain", "Vector Databases", "LLM APIs"],
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    border: "group-hover:border-blue-500/50"
   },
   {
     title: "CryptoClever",
     status: "Under Development",
     links: { "Web": "http://4.213.225.24:3000/?nocache=1774121094931" },
-    description: "A trading signal platform for crypto utilizing a Fibonacci algorithm (originally Python, translated to TypeScript) and the Binance Free API for real-time live signal chart movements. It calculates candles algorithmically to suggest next movements, while RAG is used to backtest past candles. Forex pairs are upcoming. Deployed to Azure using GitHub Actions CI/CD pipelines.",
-    tech: ["TypeScript", "Python", "Binance API", "Azure", "GitHub Actions"],
+    image: "/landingimage/cryptoclever.png",
+    description: "Trading Engine signal. Use open AI langchain - news tools and deep analysis to give signals.",
+    tech: ["TypeScript", "Python", "Binance API", "Azure", "LangChain"],
     gradient: "from-rose-500/20 to-pink-500/20",
-    border: "group-hover:border-rose-500/50"
+  },
+  {
+    title: "WritebookAI",
+    status: "Live Production",
+    links: { "Web": "http://writebookai.com" },
+    image: "/landingimage/writebookAI.png",
+    description: "Write complete chapter and book from user prompt while giving 90% human style writing draft - build tool for amazon KDP. Use Gemini API for text generation and text humanizations. Inbuilt editor like Notion.",
+    tech: ["React", "Node.js", "PostgreSQL", "Gemini", "Stripe"],
+    gradient: "from-purple-500/20 to-blue-500/20",
+  },
+  {
+    title: "Blago AI",
+    status: "Production",
+    links: { "App Landing": "https://seo-ai-eppw.vercel.app/", "Dashboard": "https://seo-ai-eppw.vercel.app/tester-login" },
+    image: "/landingimage/blagoAi.png",
+    description: "Write human style undetectable content and post on WordPress within app.",
+    tech: ["Google Gemini", "React", "WordPress API"],
+    gradient: "from-teal-500/20 to-emerald-500/20",
+  },
+  {
+    title: "Clevechat",
+    status: "Production",
+    links: { "Demo": "https://agent-live-vpbp.vercel.app/" },
+    image: "/landingimage/cleaverchat.png",
+    description: "RAG base chat which user can talk with uploaded documents.",
+    tech: ["Python", "LangChain", "Vector Databases", "LLM APIs"],
+    gradient: "from-blue-500/20 to-cyan-500/20",
+  },
+  {
+    title: "CvstudioORg",
+    status: "Open Source",
+    links: { "Web": "https://cvstudio.org" },
+    image: "/landingimage/cvstudio.png",
+    description: "Open source free CV Maker.",
+    tech: ["Next.js", "TailwindCSS"],
+    gradient: "from-orange-500/20 to-amber-500/20",
   }
 ];
 
 export default function Projects() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  // Handle escape key to close modal
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedImage(null);
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
-
-  // Prevent scrolling when modal is open
-  useEffect(() => {
-    if (selectedImage) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [selectedImage]);
-
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="projects" className="py-24 relative overflow-hidden bg-black">
+      <div className="container mx-auto px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-20 text-center md:text-left"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 font-mono">
-            <span className="text-teal-400 mr-2">03.</span> Select Projects
+          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white">
+            <span className="text-teal-400 mr-2 font-mono text-2xl md:text-3xl">02.</span> Build <span className="text-gradient">Impactful</span> Projects
           </h2>
-          <p className="text-gray-400 text-lg mb-2">Real-world applications built for production.</p>
-          <p className="text-gray-500 text-sm max-w-3xl leading-relaxed">
-            * These projects are for the demonstration of skills and capabilities. Many other projects have been excluded from this portfolio due to NDA agreements with previous clients.
+          <p className="text-gray-400 text-xl max-w-3xl leading-relaxed">
+            These curated engineering case studies demonstrate technical depth, architectural proficiency, and the ability to design and ship production-grade AI solutions for complex enterprise environments.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-40">
           {projectsData.map((project, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className={clsx(
-                "group relative rounded-2xl overflow-hidden bg-[#111] border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl",
-                project.border
+                "flex flex-col gap-12 items-center",
+                idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               )}
             >
-              {/* Card Gradient Background */}
-              <div className={clsx("absolute inset-0 bg-gradient-to-br opacity-50 transition-opacity group-hover:opacity-100", project.gradient)} />
-              
-              <div className="relative p-8 h-full flex flex-col z-10 glass-card mx-2 my-2 bg-[#0a0a0a]/90 h-[calc(100%-16px)]">
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <span className="inline-block px-3 py-1 mb-4 text-xs font-mono font-medium rounded-full bg-white/10 text-gray-300">
+              {/* Text Side */}
+              <div className="w-full md:w-1/2">
+                <motion.div
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="px-4 py-1.5 text-xs font-mono font-bold tracking-wider uppercase rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">
                       {project.status}
                     </span>
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
-                      {project.title}
-                    </h3>
                   </div>
                   
-                  <div className="flex space-x-3 text-gray-400 items-center">
-                    {Object.entries(project.links).map(([key, url]) => {
-                      const isWebLink = key.toLowerCase() !== 'github';
-                      
-                      return (
-                        <div key={key} className="relative group/link flex items-center">
-                          {isWebLink && (
-                            <div className="absolute right-full mr-3 opacity-0 group-hover/link:opacity-100 transition-all duration-300 translate-x-4 group-hover/link:translate-x-0 pointer-events-none z-20">
-                              <span className="text-teal-400 font-mono text-xs whitespace-nowrap bg-teal-900/40 px-3 py-1.5 rounded-md border border-teal-400/30 backdrop-blur-md flex items-center shadow-[0_0_15px_rgba(45,212,191,0.3)]">
-                                <span className="font-semibold text-white mr-2">{key}</span> 
-                                <span className="opacity-50 mr-2">|</span> 
-                                Test it live
-                              </span>
-                            </div>
-                          )}
-                          
-                          <a 
-                            href={url as string} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className={clsx(
-                              "transition-all duration-300 relative z-10 p-2 rounded-lg flex items-center justify-center",
-                              isWebLink 
-                                ? "text-teal-400 hover:bg-teal-400/20 group-hover/link:shadow-[0_0_15px_rgba(45,212,191,0.2)]" 
-                                : "hover:text-white hover:bg-white/10"
-                            )}
-                            aria-label={key}
-                          >
-                            {key.toLowerCase() === 'github' ? <Github size={20} /> : <ArrowUpRight size={24} className={isWebLink ? "drop-shadow-[0_0_8px_rgba(45,212,191,0.6)]" : ""} />}
-                            
-                            {isWebLink && (
-                              <span className="absolute top-1 right-1 flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
-                              </span>
-                            )}
-                          </a>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {project.image && (
-                  <div 
-                    className="mb-6 rounded-xl overflow-hidden border border-white/10 group/img relative cursor-zoom-in"
-                    onClick={() => setSelectedImage(project.image as string)}
-                  >
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-auto object-cover transition-transform duration-500 group-hover/img:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-white text-xs font-mono bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 transform translate-y-4 group-hover/img:translate-y-0 transition-transform duration-300">
-                        Click to enlarge
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                <p className="text-gray-400 leading-relaxed mb-6 flex-grow">
-                  {project.description}
-                </p>
-
-                {project.users && (
-                  <p className="text-sm text-purple-400 mb-6 font-medium">
-                    {project.users}
+                  <h3 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+                    {project.description}
                   </p>
-                )}
 
-                <ul className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/10 font-mono text-xs text-gray-400">
-                  {project.tech.map((tech, tIdx) => (
-                    <li key={tIdx} className="mr-3 mb-2 whitespace-nowrap">
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
+                  <div className="flex flex-wrap gap-2 mb-10">
+                    {project.tech.map((tech, tIdx) => (
+                      <span key={tIdx} className="px-4 py-2 text-sm font-mono text-gray-400 bg-white/5 rounded-lg border border-white/10 hover:border-teal-500/30 transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-4">
+                    {Object.entries(project.links).map(([key, url]) => (
+                      <a
+                        key={key}
+                        href={url as string}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2 px-8 py-4 font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]"
+                      >
+                        <span>{key}</span>
+                        <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Image Side */}
+              <div className="w-full md:w-1/2">
+                <motion.div
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative group/img"
+                >
+                  <div className={clsx(
+                    "absolute -inset-4 rounded-[2rem] bg-gradient-to-br opacity-0 group-hover/img:opacity-100 blur-2xl transition-opacity duration-700",
+                    project.gradient
+                  )} />
+                  <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-auto object-cover transition-transform duration-700 group-hover/img:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-10 cursor-zoom-out"
-          >
-            <motion.button
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-[110]"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedImage(null);
-              }}
-            >
-              <X size={24} />
-            </motion.button>
-
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative max-w-7xl w-full h-full flex items-center justify-center p-2"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={selectedImage}
-                alt="Zoomed project view"
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/10"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Decorative background elements */}
+      <div className="absolute top-1/2 left-0 w-64 h-64 bg-teal-600/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px] pointer-events-none" />
     </section>
   );
 }

@@ -15,8 +15,8 @@ export default function Home() {
       <NavBar />
       <Hero />
       <About />
-      <Experience />
       <Projects />
+      <Experience />
       <Strength />
       <Achievements />
       <Hybrid />
