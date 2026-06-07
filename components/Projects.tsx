@@ -17,7 +17,7 @@ const projectsData = [
   {
     title: "CryptoClever",
     status: "Under Development",
-    links: { "Web": "http://20.198.93.159:3000/?nocache=1778139614527" },
+    links: { "Web": "http://20.9.95.66/" },
     image: "/landingimage/cryptoclever.png",
     description: "Trading Engine signal. Use open AI langchain - news tools and deep analysis to give signals.",
     tech: ["TypeScript", "Python", "Binance API", "Azure", "LangChain"],
