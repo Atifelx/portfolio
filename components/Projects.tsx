@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight, Zap } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Github, ArrowUpRight, Zap, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 
 const projectsData = [
@@ -71,27 +72,11 @@ const projectsData = [
   }
 ];
 
-export default function Projects() {
-  return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-black">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20 text-center md:text-left"
-        >
-          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white">
-            <span className="text-teal-400 mr-2 font-mono text-2xl md:text-3xl">01.</span> Build <span className="text-gradient">Impactful</span> Projects
-          </h2>
-          <p className="text-gray-400 text-xl max-w-3xl leading-relaxed">
-            These curated engineering case studies demonstrate technical depth, architectural proficiency, and the ability to design and ship production-grade AI solutions for complex enterprise environments.
-          </p>
-        </motion.div>
+const featuredProjects = projectsData.filter(p => p.title !== "CvstudioOrg" && p.title !== "Blago AI");
+const exploreProjects = projectsData.filter(p => p.title === "CvstudioOrg" || p.title === "Blago AI");
 
-        <div className="space-y-40">
-          {projectsData.map((project, idx) => (
+function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: number }) {
+  return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 50 }}
@@ -213,8 +198,75 @@ export default function Projects() {
                 </motion.div>
               </div>
             </motion.div>
+  );
+}
+
+export default function Projects() {
+  const [showExplore, setShowExplore] = useState(false);
+
+  return (
+    <section id="projects" className="py-24 relative overflow-hidden bg-black">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-20 text-center md:text-left"
+        >
+          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white">
+            <span className="text-teal-400 mr-2 font-mono text-2xl md:text-3xl">01.</span> Build <span className="text-gradient">Impactful</span> Projects
+          </h2>
+          <p className="text-gray-400 text-xl max-w-3xl leading-relaxed">
+            These curated engineering case studies demonstrate technical depth, architectural proficiency, and the ability to design and ship production-grade AI solutions for complex enterprise environments.
+          </p>
+        </motion.div>
+
+        <div className="space-y-40">
+          {featuredProjects.map((project, idx) => (
+            <ProjectCard key={idx} project={project} idx={idx} />
           ))}
         </div>
+
+        {/* Explore More */}
+        <div className="mt-32 text-center">
+          <button
+            onClick={() => setShowExplore(!showExplore)}
+            className={clsx(
+              "group inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-300",
+              showExplore
+                ? "bg-teal-400/10 text-teal-400 border border-teal-400/30"
+                : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20"
+            )}
+          >
+            <span>{showExplore ? "Hide Projects" : "Explore More Projects"}</span>
+            <ChevronDown
+              size={22}
+              className={clsx(
+                "transition-transform duration-300",
+                showExplore && "rotate-180"
+              )}
+            />
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {showExplore && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="space-y-40 pt-32">
+                {exploreProjects.map((project, idx) => (
+                  <ProjectCard key={idx} project={project} idx={idx} />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Decorative background elements */}
