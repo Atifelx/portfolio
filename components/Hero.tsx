@@ -89,7 +89,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="/Atif_Shaikh_Resume.pdf"
+              href="/Atif_Shaikh7.pdf"
               download
               target="_blank"
               rel="noopener noreferrer"
