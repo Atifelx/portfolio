@@ -138,6 +138,111 @@ export default function Chatbot() {
     }
   };
 
+  const executeTools = (reply: string) => {
+    // Parse and execute tool tags from AI response
+    const toolPattern = /\[TOOL:([\w_]+)(?::(.+?))?\]/g;
+    let match;
+
+    while ((match = toolPattern.exec(reply)) !== null) {
+      const action = match[1];
+      const dataStr = match[2];
+
+      switch (action) {
+        case "OPEN_EMAIL_FORM":
+          setTimeout(() => setShowEmailForm(true), 500);
+          break;
+
+        case "SEND_EMAIL":
+          if (dataStr) {
+            try {
+              const data = JSON.parse(dataStr);
+              const formData = {
+                recruiterName: data.name || "",
+                company: data.company || "",
+                role: data.role || "",
+                email: data.email || "",
+                message: data.message || "",
+              };
+              setEmailForm(formData);
+              if (formData.recruiterName && formData.company && formData.role) {
+                // Auto-send if we have all required fields
+                setTimeout(() => autoSendEmail(formData), 800);
+              } else {
+                // Pre-fill and open form for user to complete
+                setTimeout(() => setShowEmailForm(true), 500);
+              }
+            } catch {
+              setTimeout(() => setShowEmailForm(true), 500);
+            }
+          }
+          break;
+
+        case "OPEN_JD_INPUT":
+          setTimeout(() => {
+            setInput("Here's my JD, can you evaluate if Atif is a good fit?\n\n");
+            inputRef.current?.focus();
+          }, 500);
+          break;
+
+        case "BOOK_CALL":
+          setTimeout(() => {
+            window.open(
+              "https://calendar.app.google/VUyweT99vyAhinNV9",
+              "_blank"
+            );
+          }, 500);
+          break;
+      }
+    }
+
+    // Return reply with tool tags stripped
+    return reply.replace(/\[TOOL:[\w_]+(?::.+?)?\]/g, "").trim();
+  };
+
+  const autoSendEmail = async (formData: typeof emailForm) => {
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "05a93e30-e1cc-4b24-8907-85cf152f62cc",
+          subject: `Recruiter Interest: ${formData.recruiterName} at ${formData.company} — ${formData.role}`,
+          from_name: "Atif Agent (Portfolio Chatbot)",
+          name: formData.recruiterName,
+          company: formData.company,
+          role: formData.role,
+          email: formData.email || "Not provided",
+          message: formData.message || "No additional message",
+          botcheck: false,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setEmailSent(true);
+        setShowEmailForm(false);
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: `✅ **Email sent to Atif!** He'll receive your interest for the **${formData.role}** role at **${formData.company}** shortly.\n\nAtif typically responds within 24 hours. You can also book a call: https://calendar.app.google/VUyweT99vyAhinNV9`,
+          },
+        ]);
+      } else {
+        throw new Error("Send failed");
+      }
+    } catch {
+      setShowEmailForm(true);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "I've pre-filled the form with your details — please review and hit **Send to Atif**.",
+        },
+      ]);
+    }
+  };
+
   const sendMessage = async (text: string) => {
     if (!text.trim() || isLoading) return;
 
@@ -159,22 +264,12 @@ export default function Chatbot() {
       });
 
       const data = await res.json();
-      const reply = data.reply || data.error || "Sorry, something went wrong.";
+      const rawReply = data.reply || data.error || "Sorry, something went wrong.";
 
-      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+      // Parse tool calls and strip tags from display text
+      const cleanReply = executeTools(rawReply);
 
-      if (newMessages.length >= 6 && !showEmailForm && !emailSent) {
-        setTimeout(() => {
-          setMessages((prev) => [
-            ...prev,
-            {
-              role: "assistant",
-              content:
-                "💡 **Interested in Atif for a role?**\n\nI can help you send a quick interest email to Atif with your details. Just click the ✉️ button below — or keep chatting!",
-            },
-          ]);
-        }, 1500);
-      }
+      setMessages((prev) => [...prev, { role: "assistant", content: cleanReply }]);
     } catch {
       setMessages((prev) => [
         ...prev,
