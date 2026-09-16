@@ -8,6 +8,7 @@ import Achievements from "@/components/Achievements";
 import Hybrid from "@/components/Hybrid";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Chatbot from "@/components/Chatbot";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <Hybrid />
       <Contact />
       <Footer />
+      <Chatbot />
     </main>
   );
 }
