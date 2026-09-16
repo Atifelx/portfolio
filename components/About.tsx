@@ -14,7 +14,7 @@ export const skillsData = [
   {
     category: "AI/ML Production",
     icon: <BrainCircuit className="w-9 h-9 mb-4 text-purple-400" />,
-    skills: ["LLMs", "LangGraph", "LangChain", "RAG Architecture", "Vector Databases", "Model Fine-tuning", "Prompt Engineering", "OpenAI / Anthropic / Gemini"],
+    skills: ["Multi-Agent Systems", "LangGraph", "LangChain", "RAG Architecture", "LLM Fine-Tuning (LoRA/QLoRA)", "Machine Learning", "Vector Databases", "Agentic AI", "OpenAI / Claude / Gemini"],
     color: "from-purple-500/20 to-purple-500/0",
     glowColor: "rgba(168, 85, 247, 0.4)",
     bgHover: "group-hover:bg-purple-500/10",
@@ -32,7 +32,7 @@ export const skillsData = [
   {
     category: "Databases & Infrastructure",
     icon: <Database className="w-9 h-9 mb-4 text-teal-400" />,
-    skills: ["PostgreSQL", "MongoDB", "ChromaDB", "Redis", "Docker", "WebSockets", "REST APIs", "ETL Pipelines"],
+    skills: ["PostgreSQL", "MongoDB", "ChromaDB", "Redis", "Docker", "Azure VM", "n8n", "WebSockets", "REST APIs"],
     color: "from-teal-500/20 to-teal-500/0",
     glowColor: "rgba(20, 184, 166, 0.4)",
     bgHover: "group-hover:bg-teal-500/10",

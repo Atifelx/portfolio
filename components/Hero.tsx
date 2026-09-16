@@ -48,7 +48,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl leading-relaxed"
           >
-            I’m a <span className="text-white font-medium">Forward-Deployed Software Engineer</span> specializing in translating complex business problems into <span className="text-white font-medium">scalable, production-grade AI solutions</span>.
+            I’m a <span className="text-white font-medium">Forward-Deployed AI Engineer</span> who embeds with enterprise clients to ship <span className="text-white font-medium">multi-agent systems, RAG pipelines, and agentic AI</span> from zero to production.
           </motion.p>
 
           <motion.div

@@ -9,16 +9,18 @@ const experienceData = [
     company: "LTIMindtree",
     date: "Dec 2024 – Present",
     points: [
-      "Led discovery from raw customer problems to MVP, translating requirements into end-to-end AI systems and shipping production solutions across time zones",
-      "Forward-deployed engineer embedding with clients; built end-to-end CRM automation using n8n over raw customer data, integrating Azure OpenAI, Microsoft Graph, OAuth2, and Azure AD; deployed RAG-based voice chatbot for real-time inventory insights, reducing manual workflows by 35%"
+      "Shipped a 4-agent market-research chatbot for P&G — LangGraph orchestration on Google Vertex AI that routes each query to the right specialized agent; now used by their internal research team daily",
+      "Built a healthcare AI automation pipeline: LLMs + Agentic RAG + n8n workflows that monitor patient health scores and fire clinical alerts when thresholds drop — zero manual triage",
+      "Deployed Azure OpenAI + Graph API automation that replaced 60% of manual data processing for 200+ daily users across 4 enterprise departments",
+      "Architected a production RAG voice chatbot (OpenAI embeddings → ChromaDB → GPT-4) that cut inventory analysis from 2+ hours to 30 seconds at 85% accuracy"
     ]
   },
   {
     title: "Developer (Contract)",
-    company: "Client: Upwork",
+    company: "Upwork",
     date: "Jan 2024 – Aug 2024 | Remote",
     points: [
-      "Built RAG-based sales chatbot over 13K inventory, driving demand forecasting and stock optimization; improved sell-through efficiency by 30%"
+      "Solo-built a RAG sales chatbot over 13K product SKUs for a fashion client — powers demand forecasting and stock optimization, drove 30% improvement in sell-through efficiency"
     ]
   },
   {
@@ -26,24 +28,24 @@ const experienceData = [
     company: "Sherweb",
     date: "Nov 2021 – Nov 2023 | Remote",
     points: [
-      "Forward-deployed engineer embedding with enterprise clients; built reliability and automation for M365 (Exchange, SharePoint, Teams, Azure AD), sustaining 99.5% SLA and leading SEV-A recoveries with engineering",
-      "Built Intune + Graph API monitoring with Teams webhook-based alerting (-45% detection time); developed React/PostgreSQL ticketing system (-35% response time)"
+      "Owned SEV-A incident response for enterprise M365 tenants — restored services within 2-hour SLA, coordinated directly with Microsoft engineering on tenant-level failures",
+      "Built an Intune + Graph API monitoring system with Teams webhook alerting that cut detection time by 45%; shipped a React/PostgreSQL ticketing platform that reduced response time by 35%"
     ]
   },
   {
-    title: "Software Engineer (Contract)",
-    company: "Client: Upwork",
+    title: "Developer (Freelance)",
+    company: "Upwork",
     date: "Dec 2019 – Aug 2020 | $20K+ earned | Remote",
     points: [
-      "Built and deployed full-stack solutions for 15+ enterprise clients across M365 and e-commerce (React, WordPress/WooCommerce); integrated payments and analytics, driving measurable conversion improvements"
+      "Shipped full-stack solutions for 15+ enterprise clients — M365 migrations, React e-commerce with Stripe/WooCommerce payment flows, and SEO landing pages that measurably improved conversion rates"
     ]
   },
   {
     title: "Technical Operations & Client Coordination",
     company: "Etisalat",
-    date: "Nov 2013 – Oct 2019 | Dubai, UAE | Onsite",
+    date: "Nov 2013 – Oct 2019 | Dubai, UAE",
     points: [
-      "Managed client coordination and negotiations across 3 engineering teams for telecommunications infrastructure; provided live customer support resolving escalations and service issues"
+      "Served as the bridge between 3 engineering teams and enterprise telecom clients — ran incident triage, escalation workflows, and contract negotiations across a 6-year tenure in Dubai"
     ]
   }
 ];

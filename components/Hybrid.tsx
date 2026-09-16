@@ -43,83 +43,77 @@ export default function Hybrid() {
           className="mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 font-mono text-left">
-            <span className="text-teal-400 mr-2">06.</span> Hybrid Systems Engineering
+            <span className="text-teal-400 mr-2">06.</span> The Unfair Advantage
           </h2>
           <div className="text-purple-400 text-xl font-medium mb-8">
-            (AI + Hardware + SaaS)
+            IoT + Machine Learning + Full-Stack — from silicon to AI, one engineer.
           </div>
 
-          <div className="glass-card p-8 border border-white/10 bg-[#0a0a0a]/80 mb-16 relative overflow-hidden group">
+          <div className="glass-card p-8 md:p-10 border border-white/10 bg-[#0a0a0a]/80 mb-16 relative overflow-hidden group">
             {/* Animated accent gradient */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-teal-500/20 transition-colors duration-700" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-purple-500/20 transition-colors duration-700" />
 
-            <h3 className="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-purple-400 mb-6 border-b border-white/10 pb-4 inline-block tracking-tight">
-              The Rare Skill Advantage: Bridging Hardware Systems & AI Software
+            <div className="flex items-center gap-4 mb-6">
+              <span className="px-4 py-2 text-sm font-black tracking-wider uppercase rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30">
+                &lt; 2% of Engineers
+              </span>
+            </div>
+
+            <h3 className="text-2xl md:text-4xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+              Most engineers know <span className="text-gray-500">software</span> or <span className="text-gray-500">hardware</span>.<br />
+              I ship products across <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-purple-400">both</span>.
             </h3>
-            
-            <div className="text-gray-200 text-xl md:text-2xl leading-relaxed font-medium">
-              Software Engineer specializing in AI-driven SaaS systems with a background in{" "}
-              <span className="text-teal-400">embedded and IoT platforms;</span> build{" "}
-              <span className="text-purple-400 font-bold italic">end-to-end architectures</span>{" "}
-              across device-level control, scalable cloud systems, and LLM pipelines, enabling real-time, data-driven automation at scale—translating ambiguous customer problems into production-grade solutions.
+
+            <div className="text-gray-300 text-lg md:text-xl leading-relaxed">
+              I write firmware for microcontrollers <span className="text-teal-400 font-semibold">and</span> build multi-agent LLM systems. I design custom PCBs <span className="text-teal-400 font-semibold">and</span> ship React SaaS platforms with Stripe billing. I solder ESP8266 boards <span className="text-teal-400 font-semibold">and</span> deploy RAG pipelines on Azure. This isn't a side hobby — it's how I think about engineering: from the sensor to the neural network to the user interface, as one connected system.
             </div>
           </div>
 
-          {/* What Sets Me Apart */}
+          {/* The Stack That Matters */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-white mb-8 border-l-4 border-teal-400 pl-4">
-              What Sets Me Apart
+              Why This Matters to You
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
+
               <div className="glass-card p-6 border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
                 <h4 className="text-white font-bold text-lg mb-3 flex items-center">
                   <span className="w-8 h-8 rounded bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold mr-3 border border-purple-500/30">01</span>
-                  End-to-End System Thinking
+                  Zero-to-One Builder
                 </h4>
                 <p className="text-gray-400 text-sm leading-relaxed pl-11">
-                  I focus on building complete systems rather than isolated features—designing architecture that connects <span className="text-white">AI models, backend services, cloud infrastructure, and real-world automation.</span>
+                  Give me a problem and no codebase. I'll architect the system, pick the stack, build the MVP, deploy it, and iterate with users — <span className="text-white">without needing a team of 5 to start.</span>
                 </p>
               </div>
 
               <div className="glass-card p-6 border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
                 <h4 className="text-white font-bold text-lg mb-3 flex items-center">
                   <span className="w-8 h-8 rounded bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold mr-3 border border-blue-500/30">02</span>
-                  Cross-Domain Engineering
+                  Hardware-Grade Debugging
                 </h4>
                 <p className="text-gray-400 text-sm leading-relaxed pl-11">
-                  My background spans <span className="text-white">AI software development, SaaS platforms, and embedded hardware systems</span>, allowing me to design solutions that bridge digital intelligence with physical devices.
+                  When you've debugged <span className="text-white">6ms latency on a motor driver with an oscilloscope</span>, debugging a distributed AI pipeline feels routine. Hardware engineers think in systems — that transfers directly.
                 </p>
               </div>
 
               <div className="glass-card p-6 border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
                 <h4 className="text-white font-bold text-lg mb-3 flex items-center">
                   <span className="w-8 h-8 rounded bg-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-bold mr-3 border border-teal-500/30">03</span>
-                  Independent Problem Solver
+                  AI Meets the Physical World
                 </h4>
                 <p className="text-gray-400 text-sm leading-relaxed pl-11">
-                  I'm comfortable working independently on complex systems, from early architecture and prototyping to production deployment and iteration.
+                  The next wave of AI isn't just chatbots — it's <span className="text-white">AI agents controlling real-world systems</span>. I've already built both sides: the agent logic and the hardware it talks to.
                 </p>
               </div>
 
               <div className="glass-card p-6 border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
                 <h4 className="text-white font-bold text-lg mb-3 flex items-center">
                   <span className="w-8 h-8 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm font-bold mr-3 border border-amber-500/30">04</span>
-                  Rapid Prototyping to Production
+                  Full Vertical Ownership
                 </h4>
                 <p className="text-gray-400 text-sm leading-relaxed pl-11">
-                  I enjoy turning ambitious ideas into working systems quickly, validating concepts through prototypes and evolving them into scalable production platforms.
-                </p>
-              </div>
-
-              <div className="glass-card p-6 border border-white/5 bg-white/5 hover:bg-white/10 transition-colors md:col-span-2">
-                <h4 className="text-white font-bold text-lg mb-3 flex items-center">
-                  <span className="w-8 h-8 rounded bg-pink-500/20 text-pink-400 flex items-center justify-center text-sm font-bold mr-3 border border-pink-500/30">05</span>
-                  Future-Focused Engineering
-                </h4>
-                <p className="text-gray-400 text-sm leading-relaxed pl-11 md:pr-12">
-                  I'm particularly interested in building systems around <span className="text-white">AI agents, intelligent automation, Web3 infrastructure, and real-world AI applications</span> that transform how industries operate.
+                  From <span className="text-white">custom PCB design → embedded firmware → cloud backend → LLM pipeline → React frontend → Stripe checkout</span> — I've shipped every layer independently.
                 </p>
               </div>
 
