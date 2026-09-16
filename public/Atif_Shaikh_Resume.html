@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atif Shaikh - Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1a1a2e;
+    line-height: 1.5;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 28px 36px;
+    background: #fff;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { padding: 24px 32px; }
+    .page-break { page-break-before: always; }
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding-bottom: 14px;
+    border-bottom: 3px solid #0f766e;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .header .subtitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f766e;
+    margin-bottom: 6px;
+  }
+
+  .header .contact {
+    font-size: 11.5px;
+    color: #475569;
+  }
+
+  .header .contact a {
+    color: #0f766e;
+    text-decoration: none;
+  }
+
+  .header .contact a:hover {
+    text-decoration: underline;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #0f766e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+  }
+
+  /* Summary */
+  .summary {
+    font-size: 11.5px;
+    color: #334155;
+    line-height: 1.6;
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 4px 12px;
+    font-size: 11px;
+  }
+
+  .skill-label {
+    font-weight: 700;
+    color: #0f172a;
+    padding: 2px 0;
+  }
+
+  .skill-value {
+    color: #475569;
+    padding: 2px 0;
+  }
+
+  /* Experience */
+  .job {
+    margin-bottom: 12px;
+  }
+
+  .job:last-child {
+    margin-bottom: 0;
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .job-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .job-company {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #0f766e;
+  }
+
+  .job-date {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .job ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .job li {
+    font-size: 11px;
+    color: #334155;
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+
+  .job li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #0f766e;
+    font-weight: 700;
+  }
+
+  /* Projects */
+  .project {
+    margin-bottom: 10px;
+  }
+
+  .project:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .project-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .project-status {
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .project li {
+    font-size: 11px;
+    color: #334155;
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 2px;
+  }
+
+  .project li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #0f766e;
+    font-weight: 700;
+  }
+
+  .project ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  /* Education */
+  .edu-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+
+  .edu-item .edu-title {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .edu-item .edu-detail {
+    color: #475569;
+  }
+
+  .edu-item .edu-year {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  /* Additional */
+  .additional li {
+    font-size: 11px;
+    color: #334155;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+
+  .additional li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #0f766e;
+    font-weight: 700;
+  }
+
+  .nda-note {
+    font-size: 10px;
+    color: #94a3b8;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  @media screen {
+    body {
+      background: #f1f5f9;
+      padding: 20px;
+    }
+    .page {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      border-radius: 4px;
+    }
+    .print-instructions {
+      text-align: center;
+      margin: 0 auto 16px;
+      max-width: 210mm;
+      padding: 12px 20px;
+      background: #0f766e;
+      color: #fff;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+    }
+    .print-instructions kbd {
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+  }
+
+  @media print {
+    .print-instructions { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-instructions">
+  Press <kbd>Cmd + P</kbd> (Mac) or <kbd>Ctrl + P</kbd> (Windows) → Save as PDF → Save to your <code>public/</code> folder as <code>Atif_Shaikh8.pdf</code>
+</div>
+
+<div class="page">
+  <!-- HEADER -->
+  <div class="header">
+    <h1>ATIF SHAIKH</h1>
+    <div class="subtitle">Forward-Deployed AI Engineer &middot; Full-Stack AI Systems Engineer</div>
+    <div class="contact">
+      aatif2003@gmail.com &nbsp;|&nbsp; India &nbsp;|&nbsp; +91 9769550173 &nbsp;|&nbsp;
+      <a href="https://linkedin.com/in/atif-shaikh">LinkedIn</a> &nbsp;|&nbsp;
+      <a href="https://github.com/atifshaikh">GitHub</a> &nbsp;|&nbsp;
+      <a href="https://atifshaikh.dev">Portfolio</a>
+    </div>
+  </div>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div class="section">
+    <div class="section-title">Professional Summary</div>
+    <div class="summary">
+      Forward-Deployed AI Engineer who embeds directly with enterprise clients to design, build, and ship production AI systems end-to-end (0→1). 11+ years spanning software development (6 years) and enterprise client engineering (5 years). Build and deploy multi-agent systems, RAG pipelines, and agentic AI workflows for Fortune 500 clients (P&G, Etisalat); independently ship AI platforms — an AI ghostwriting tool with 170+ users, a multi-agent trading system, and an SEO content platform. Deep hands-on experience with LLM fine-tuning (LoRA/QLoRA), Transformer architecture, machine learning, and open-weight models (Llama, Mistral). Skilled at remote collaboration across US/EU time zones, rapid prototyping, and translating ambiguous customer problems into working production code.
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-label">AI/ML</div>
+      <div class="skill-value">Multi-Agent Systems, Agentic AI, RAG Architecture, LLM Fine-Tuning (LoRA/QLoRA), Machine Learning (scikit-learn), Transformer Architecture, Open-Weight Models (Llama, Mistral), Vector Databases (ChromaDB), Prompt Engineering, NLP</div>
+
+      <div class="skill-label">AI Platforms</div>
+      <div class="skill-value">OpenAI API, Anthropic Claude, Azure OpenAI, Google Gemini, Google Vertex AI, LangChain, LangGraph, n8n (Agentic Workflows)</div>
+
+      <div class="skill-label">Languages</div>
+      <div class="skill-value">Python, JavaScript, TypeScript, SQL, React, Node.js, Next.js, Express</div>
+
+      <div class="skill-label">Infrastructure</div>
+      <div class="skill-value">PostgreSQL, MongoDB, ChromaDB, Redis, Docker, Azure VM, WebSockets, REST APIs, ETL Pipelines</div>
+
+      <div class="skill-label">Enterprise</div>
+      <div class="skill-value">Microsoft 365, Microsoft Graph API, Azure AD, OAuth2, JWT, PowerShell, WordPress API, Stripe, Binance API</div>
+
+      <div class="skill-label">FDE Skills</div>
+      <div class="skill-value">Client Embedding, Rapid Prototyping (POCs), Remote Deployment, Pre-sales Technical Evaluation, Stakeholder Management, Cross-Timezone Collaboration, SEV-A Incident Response</div>
+    </div>
+  </div>
+
+  <!-- PROFESSIONAL EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Professional Experience</div>
+
+    <!-- LTIMindtree -->
+    <div class="job">
+      <div class="job-header">
+        <div><span class="job-title">Software Engineer – Enterprise AI Solutions</span> <span class="job-company">&nbsp;|&nbsp; LTIMindtree</span></div>
+        <div class="job-date">Dec 2024 – Present</div>
+      </div>
+      <ul>
+        <li>Forward-deployed engineer embedding remotely with US and European enterprise clients; conduct virtual discovery sessions across time zones, diagnosing operational bottlenecks and translating them into production AI solutions</li>
+        <li>Built a 4-agent market-research chatbot for P&G's internal research team using LangGraph multi-agent orchestration, deployed on Google Vertex AI; routes user intent to specialized agents for product-research surveys</li>
+        <li>Designed and deployed healthcare AI automation system using LLMs, Agentic RAG, and n8n workflows — monitors patient health scores daily and triggers automated alerts when scores fall below clinical thresholds</li>
+        <li>Deployed Azure OpenAI + Microsoft Graph API automation integrating with OAuth2, Azure AD, and legacy databases; eliminated 60% manual processing for 200+ daily users across 4 departments</li>
+        <li>Built production RAG chatbot (Google Voice API, OpenAI embeddings, ChromaDB vector search, GPT-4) reducing inventory analysis from 2+ hours to under 30 seconds with 85% accuracy</li>
+        <li>Collaborate with sales on pre-sales technical evaluations; deliver remote product demos to enterprise stakeholders supporting deal scoping and contract expansion</li>
+      </ul>
+    </div>
+
+    <!-- Upwork 2024 -->
+    <div class="job">
+      <div class="job-header">
+        <div><span class="job-title">Developer (Contract)</span> <span class="job-company">&nbsp;|&nbsp; Upwork</span></div>
+        <div class="job-date">Jan 2024 – Aug 2024 · Remote</div>
+      </div>
+      <ul>
+        <li>Built RAG-based sales chatbot over 13K product inventory for fashion industry client, driving demand forecasting and stock optimization; improved sell-through efficiency by 30%</li>
+      </ul>
+    </div>
+
+    <!-- Sherweb -->
+    <div class="job">
+      <div class="job-header">
+        <div><span class="job-title">Software Engineer – Enterprise M365</span> <span class="job-company">&nbsp;|&nbsp; Sherweb</span></div>
+        <div class="job-date">Nov 2021 – Nov 2023 · Remote</div>
+      </div>
+      <ul>
+        <li>Forward-deployed engineer embedding with enterprise clients; provided direct technical support on M365 platform (Exchange, SharePoint, Teams, Azure AD) maintaining 99.5% uptime SLA</li>
+        <li>Acted as SME for SEV-A incidents; worked remotely to restore services within 2-hour SLA; collaborated with Microsoft engineering on tenant-level failures</li>
+        <li>Built monitoring tool (Microsoft Intune + Graph API) with Teams webhook alerting reducing detection time by 45%; developed React/PostgreSQL ticketing system reducing response time by 35%</li>
+      </ul>
+    </div>
+
+    <!-- Upwork Freelance -->
+    <div class="job">
+      <div class="job-header">
+        <div><span class="job-title">Developer (Freelance)</span> <span class="job-company">&nbsp;|&nbsp; Upwork</span></div>
+        <div class="job-date">Dec 2019 – Aug 2020 · $20K+ earned · Remote</div>
+      </div>
+      <ul>
+        <li>Delivered M365 support for 15+ enterprise clients; built e-commerce solutions (React, WordPress/WooCommerce) with payment integration and SEO-optimized landing pages</li>
+      </ul>
+    </div>
+
+    <!-- Etisalat -->
+    <div class="job">
+      <div class="job-header">
+        <div><span class="job-title">Technical Operations & Client Coordination</span> <span class="job-company">&nbsp;|&nbsp; Etisalat</span></div>
+        <div class="job-date">Nov 2013 – Oct 2019 · Dubai, UAE</div>
+      </div>
+      <ul>
+        <li>Managed client coordination and negotiations across 3 engineering teams for telecommunications infrastructure; led incident triage, escalation workflows, and post-incident reviews</li>
+        <li>Served as primary liaison between technical teams and enterprise clients; negotiated service agreements maintaining high client satisfaction</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SELECTED PROJECTS -->
+  <div class="section">
+    <div class="section-title">Selected Projects</div>
+    <div class="nda-note">Enterprise client projects are confidential under NDA. Projects below demonstrate independent technical range.</div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">CryptoClever – Multi-Agent Trading System</span>
+        <span class="project-status">Under Testing / Pre-Deployment</span>
+      </div>
+      <ul>
+        <li>Agentic trading platform: 4 autonomous LangGraph agents — Scalp and Long-signal agents running 24/7 live on Azure VM, plus 2 algo-trading agents executing live trades on Binance via own decision logic</li>
+        <li>Each signal passes 14 parameter checks including live news integration; ~60% signal accuracy | Tech: LangGraph, Python, Binance API, Azure VM, WebSockets, ChromaDB</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">WriteBookAI – AI Ghostwriter</span>
+        <span class="project-status">Live Production · writebookai.com</span>
+      </div>
+      <ul>
+        <li>Extracts an author's voice DNA to write full chapters in the author's own style; 170+ active authors | Tech: React, Node.js, PostgreSQL, OpenAI/Claude/Gemini orchestration, Stripe</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">Blago AI – SEO Content Platform</span>
+        <span class="project-status">Live Production</span>
+      </div>
+      <ul>
+        <li>AI platform generating human-style undetectable SEO content and publishing directly to WordPress within app | Tech: Google Gemini, React, WordPress API</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">Clevechat – RAG Document Chat</span>
+        <span class="project-status">Production</span>
+      </div>
+      <ul>
+        <li>RAG-based conversational interface for querying uploaded documents | Tech: Python, LangChain, Vector Databases, LLM APIs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-item">
+      <div><span class="edu-title">B.E. Electronics & Communication</span> <span class="edu-detail">– Visvesvaraya Technological University, Bangalore</span></div>
+    </div>
+    <div class="edu-item">
+      <div><span class="edu-title">MBA</span> <span class="edu-detail">– Sikkim Manipal University</span></div>
+      <div class="edu-year">2013</div>
+    </div>
+    <div class="edu-item">
+      <div><span class="edu-title">Advanced Full-Stack Development Bootcamp</span> <span class="edu-detail">– MERN Stack, System Design, Crio.do</span></div>
+      <div class="edu-year">2020</div>
+    </div>
+  </div>
+
+  <!-- ADDITIONAL -->
+  <div class="section">
+    <div class="section-title">Additional</div>
+    <ul class="additional" style="list-style:none; padding:0;">
+      <li>Certifications: ITIL Foundation (2015), Microsoft MD-101 (2023), Microsoft MS-900 (2023), Embedded Systems (Prolific Pvt. Ltd.)</li>
+      <li>Experienced working remotely with European and US clients across multiple time zones; open to relocation</li>
+      <li>Work authorization: Indian citizen, open to US/EU sponsorship</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

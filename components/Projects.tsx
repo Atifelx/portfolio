@@ -1,44 +1,54 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { ExternalLink, Github, ArrowUpRight, Zap } from "lucide-react";
 import clsx from "clsx";
 
 const projectsData = [
   {
+    title: "CryptoClever",
+    status: "Live — Agents Trading 24/7",
+    featured: true,
+    links: { "Live Dashboard": "http://20.198.93.159:3000/" },
+    image: "/landingimage/cryptoclever.png",
+    description: "A fully autonomous multi-agent trading system where 4 LangGraph agents make independent trading decisions on Binance — no human in the loop. Two signal agents (Scalp + Long) run 24/7 on an Azure VM analyzing live market data, while 2 algo-trading agents execute real trades using their own decision logic. Each signal passes through 14 parameter checks — including live news sentiment via API, RSI/MACD/Bollinger technical indicators, and volume analysis — before firing. Agents coordinate via shared ChromaDB memory and communicate state over WebSockets. Currently hitting ~60% signal accuracy in live testing.",
+    tech: ["LangGraph", "Multi-Agent", "Python", "Binance API", "Azure VM", "ChromaDB", "WebSockets", "OpenAI", "Live News API"],
+    gradient: "from-rose-500/20 to-pink-500/20",
+    architecture: [
+      "Signal Agent (Scalp) — scans 1m/5m candles, fires short-term entries",
+      "Signal Agent (Long) — analyzes 1h/4h trends for swing positions",
+      "Algo Agent 1 — executes market orders on Binance with stop-loss logic",
+      "Algo Agent 2 — manages position sizing and portfolio risk",
+      "Shared Memory — ChromaDB stores agent decisions for cross-agent reasoning"
+    ]
+  },
+  {
+    title: "WriteBookAI",
+    status: "Live Production — 170+ Authors",
+    featured: true,
+    links: { "Try It": "http://writebookai.com" },
+    image: "/landingimage/writebookAI.png",
+    description: "An AI ghostwriting platform that extracts an author's unique 'voice DNA' — tone, rhythm, vocabulary patterns, and sentence structure — then writes full chapters that sound like the author wrote them. Built as a direct competitor to leading AI writing tools but with a key differentiator: it doesn't just generate text, it becomes a writing partner that discusses ideas, develops plot arcs, and maintains character consistency across chapters. Multi-LLM orchestration routes tasks to OpenAI, Claude, or Gemini based on the writing task. 170+ active authors using it for Amazon KDP publishing. Built-in Notion-style editor with real-time collaboration.",
+    tech: ["React", "Node.js", "PostgreSQL", "OpenAI", "Claude", "Gemini", "Multi-LLM Orchestration", "Stripe", "Voice DNA Engine"],
+    gradient: "from-purple-500/20 to-blue-500/20",
+  },
+  {
     title: "Healthcare AI Automation",
-    status: "Production",
+    status: "Enterprise Production",
+    featured: true,
     links: {},
     image: "/n8n.png",
-    description: "A full-scale automation system for healthcare enterprise customers using LLMs, Agentic RAG, and intelligent n8n workflows. The system monitors health scores daily and triggers automated alerts if scores fall below defined thresholds.",
-    tech: ["n8n", "LLM", "Agentic RAG", "AI Agents", "Python"],
+    description: "Enterprise healthcare automation built for a real client — uses LLMs with Agentic RAG and n8n workflow orchestration to monitor patient health scores daily. When scores fall below clinical thresholds, the system triggers automated alerts to care teams with contextual recommendations pulled from the patient's medical history via RAG. End-to-end: data ingestion, LLM reasoning, alert routing, and clinician dashboards.",
+    tech: ["n8n", "LLM", "Agentic RAG", "AI Agents", "Python", "Healthcare"],
     gradient: "from-cyan-500/20 to-blue-500/20",
-  },
-  {
-    title: "CryptoClever",
-    status: "Under Development",
-    links: { "Web": "http://20.198.93.159:3000/" },
-    image: "/landingimage/cryptoclever.png",
-    description: "Trading Engine signal. Use open AI langchain - news tools and deep analysis to give signals.",
-    tech: ["TypeScript", "Python", "Binance API", "Azure", "LangChain"],
-    gradient: "from-rose-500/20 to-pink-500/20",
-  },
-  {
-    title: "WritebookAI",
-    status: "Live Production",
-    links: { "Web": "http://writebookai.com" },
-    image: "/landingimage/writebookAI.png",
-    description: "Write complete chapter and book from user prompt while giving 90% human style writing draft - build tool for amazon KDP. Use Gemini API for text generation and text humanizations. Inbuilt editor like Notion.",
-    tech: ["React", "Node.js", "PostgreSQL", "Gemini", "Stripe"],
-    gradient: "from-purple-500/20 to-blue-500/20",
   },
   {
     title: "Blago AI",
     status: "Production",
     links: { "App Landing": "https://seo-ai-eppw.vercel.app/", "Dashboard": "https://seo-ai-eppw.vercel.app/tester-login" },
     image: "/landingimage/blagoAi.png",
-    description: "Write human style undetectable content and post on WordPress within app.",
-    tech: ["Google Gemini", "React", "WordPress API"],
+    description: "AI-powered SEO content platform that generates human-style, undetectable content and publishes directly to WordPress — all within the app. Built for content teams who need to scale organic traffic without sounding robotic.",
+    tech: ["Google Gemini", "React", "WordPress API", "SEO Optimization"],
     gradient: "from-teal-500/20 to-emerald-500/20",
   },
   {
@@ -46,16 +56,16 @@ const projectsData = [
     status: "Production",
     links: { "Demo": "https://agent-live-vpbp.vercel.app/" },
     image: "/landingimage/cleaverchat.png",
-    description: "RAG base chat which user can talk with uploaded documents.",
-    tech: ["Python", "LangChain", "Vector Databases", "LLM APIs"],
+    description: "RAG-based conversational AI that lets users upload any document and have a natural conversation with its contents. Handles PDFs, Word docs, and text files with semantic chunking and vector search for accurate retrieval.",
+    tech: ["Python", "LangChain", "Vector Databases", "LLM APIs", "RAG"],
     gradient: "from-blue-500/20 to-cyan-500/20",
   },
   {
-    title: "CvstudioORg",
+    title: "CvstudioOrg",
     status: "Open Source",
     links: { "Web": "https://cvstudio.org" },
     image: "/landingimage/cvstudio.png",
-    description: "Open source free CV Maker.",
+    description: "Open-source, free resume builder with modern templates and real-time preview.",
     tech: ["Next.js", "TailwindCSS"],
     gradient: "from-orange-500/20 to-amber-500/20",
   }
@@ -101,22 +111,58 @@ export default function Projects() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-6">
-                    <span className="px-4 py-1.5 text-xs font-mono font-bold tracking-wider uppercase rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                    {(project as any).featured && (
+                      <span className="px-3 py-1 text-xs font-bold tracking-wider uppercase rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30 flex items-center gap-1.5">
+                        <Zap size={12} className="fill-amber-400" />
+                        Featured
+                      </span>
+                    )}
+                    <span className={clsx(
+                      "px-4 py-1.5 text-xs font-mono font-bold tracking-wider uppercase rounded-full border",
+                      project.status.includes("Live")
+                        ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                        : "bg-teal-500/10 text-teal-400 border-teal-500/20"
+                    )}>
+                      {project.status.includes("Live") && (
+                        <span className="inline-block w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse" />
+                      )}
                       {project.status}
                     </span>
                   </div>
-                  
+
                   <h3 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
                     {project.title}
                   </h3>
-                  
+
                   <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
                     {project.description}
                   </p>
 
+                  {/* Architecture Breakdown for CryptoClever */}
+                  {(project as any).architecture && (
+                    <div className="mb-8 p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+                      <h4 className="text-sm font-mono font-bold text-teal-400 uppercase tracking-widest mb-4">Agent Architecture</h4>
+                      <div className="space-y-3">
+                        {(project as any).architecture.map((line: string, aIdx: number) => (
+                          <div key={aIdx} className="flex items-start gap-3">
+                            <span className="mt-1 w-6 h-6 rounded-md bg-gradient-to-br from-rose-500/20 to-pink-500/20 border border-rose-500/20 flex items-center justify-center text-xs font-bold text-rose-400 flex-shrink-0">
+                              {aIdx + 1}
+                            </span>
+                            <span className="text-sm text-gray-300 leading-relaxed">{line}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex flex-wrap gap-2 mb-10">
                     {project.tech.map((tech, tIdx) => (
-                      <span key={tIdx} className="px-4 py-2 text-sm font-mono text-gray-400 bg-white/5 rounded-lg border border-white/10 hover:border-teal-500/30 transition-colors">
+                      <span key={tIdx} className={clsx(
+                        "px-4 py-2 text-sm font-mono rounded-lg border transition-colors",
+                        (project as any).featured
+                          ? "text-gray-300 bg-white/[0.07] border-white/15 hover:border-teal-500/40 hover:text-teal-300"
+                          : "text-gray-400 bg-white/5 border-white/10 hover:border-teal-500/30"
+                      )}>
                         {tech}
                       </span>
                     ))}
@@ -129,7 +175,12 @@ export default function Projects() {
                         href={url as string}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 px-8 py-4 font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]"
+                        className={clsx(
+                          "group inline-flex items-center gap-2 px-8 py-4 font-bold rounded-2xl transition-all duration-300 hover:-translate-y-1",
+                          (project as any).featured
+                            ? "text-black bg-teal-400 hover:bg-teal-300 hover:shadow-[0_10px_40px_-10px_rgba(45,212,191,0.5)]"
+                            : "text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]"
+                        )}
                       >
                         <span>{key}</span>
                         <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
