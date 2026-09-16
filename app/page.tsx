@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Hybrid from "@/components/Hybrid";
+import Strength from "@/components/Strength";
 import SocialProof from "@/components/SocialProof";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -17,6 +18,7 @@ export default function Home() {
       <Projects />
       <Experience />
       <Hybrid />
+      <Strength />
       <About />
       <SocialProof />
       <Contact />
