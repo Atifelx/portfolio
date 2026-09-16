@@ -190,14 +190,24 @@ export default function Chatbot() {
   };
 
   const handleSendEmail = async () => {
-    const { recruiterName, company, role } = emailForm;
+    const { recruiterName, company, role, email, message } = emailForm;
     if (!recruiterName || !company || !role) return;
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(emailForm),
+        body: JSON.stringify({
+          access_key: "05a93e30-e1cc-4b24-8907-85cf152f62cc",
+          subject: `Recruiter Interest: ${recruiterName} at ${company} — ${role}`,
+          from_name: "Atif Agent (Portfolio Chatbot)",
+          name: recruiterName,
+          company,
+          role,
+          email: email || "Not provided",
+          message: message || "No additional message",
+          botcheck: false,
+        }),
       });
       const data = await res.json();
       if (data.success) {

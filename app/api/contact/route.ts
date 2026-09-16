@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const WEB3FORMS_KEY = process.env.WEB3FORMS_KEY;
-
 export async function POST(req: NextRequest) {
   const { recruiterName, company, role, email, message } = await req.json();
 
@@ -12,7 +10,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!WEB3FORMS_KEY) {
+  const accessKey = process.env.WEB3FORMS_KEY;
+
+  if (!accessKey) {
+    console.error("WEB3FORMS_KEY is not set");
     return NextResponse.json(
       { error: "Email service not configured" },
       { status: 500 }
@@ -24,8 +25,8 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject: `🔥 Recruiter Interest: ${recruiterName} at ${company} — ${role}`,
+        access_key: accessKey,
+        subject: `Recruiter Interest: ${recruiterName} at ${company} — ${role}`,
         from_name: "Atif Agent (Portfolio Chatbot)",
         name: recruiterName,
         company,
@@ -42,11 +43,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true });
     }
 
+    console.error("Web3Forms error:", data);
     return NextResponse.json(
       { error: "Failed to send email" },
       { status: 500 }
     );
-  } catch {
+  } catch (err) {
+    console.error("Contact API error:", err);
     return NextResponse.json(
       { error: "Failed to send email" },
       { status: 500 }
