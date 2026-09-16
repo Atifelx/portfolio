@@ -22,23 +22,28 @@ export default function Strength() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
+              <div className="mb-4">
+                <span className="px-3 py-1.5 text-xs font-black tracking-widest uppercase rounded-full bg-gradient-to-r from-teal-500/20 to-blue-500/20 text-teal-400 border border-teal-500/30">
+                  Forward Deployed Engineer
+                </span>
+              </div>
+              <p className="text-white text-xl md:text-2xl font-bold leading-snug">
+                I don't just write code — I ship entire products solo: from <span className="text-teal-400">RAG pipelines</span> and <span className="text-teal-400">multi-agent AI</span> to <span className="text-teal-400">custom hardware</span>, deployed and revenue-ready.
+              </p>
               <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-                My greatest strength lies in <span className="text-white font-semibold">end-to-end solution architecture</span>. Given any complex requirement, I can design, build, and deploy production-ready applications utilizing industry best practices.
+                Proof: <span className="text-white font-semibold">CryptoClever</span> (6-month live trading agents), <span className="text-white font-semibold">WriteBookAI</span> (AI book platform with paying users), <span className="text-white font-semibold">Clever RAG</span> (agentic chatbot with Pinecone + Tavily), and <span className="text-white font-semibold">4G RC car with 6ms latency firmware</span> — all built and shipped independently.
               </p>
               <p className="text-gray-400 text-lg leading-relaxed">
-                My independent work spans building conversational AI for the fashion industry to developing scalable MVPs that have helped startups successfully secure funding. 
-              </p>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                I've also had the privilege of collaborating directly with industry leaders such as{" "}
-                <a 
-                  href="https://www.linkedin.com/in/chiranjiv/" 
-                  target="_blank" 
+                Industry leaders vouch for it — here's what{" "}
+                <a
+                  href="https://www.linkedin.com/in/chiranjiv/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-baseline text-teal-400 hover:text-teal-300 transition-colors font-medium border-b border-teal-400/30 hover:border-teal-400 pb-0.5"
                 >
-                  Dr. Chiranjiv Roy 
+                  Dr. Chiranjiv Roy (OnCon Global Top 50, ex-Nissan/Mercedes)
                   <ExternalLink size={14} className="ml-1 relative top-[2px]" />
-                </a>.
+                </a>{" "}and my direct manager at Etisalat had to say:
               </p>
             </div>
             
