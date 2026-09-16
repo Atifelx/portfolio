@@ -260,7 +260,7 @@ export default function About() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <h2 className="text-4xl md:text-7xl font-black mb-4 tracking-tight text-white leading-tight">
-                <span className="text-teal-400 mr-4 font-mono text-3xl md:text-4xl">01.</span>
+                <span className="text-teal-400 mr-4 font-mono text-3xl md:text-4xl">04.</span>
                 Technical Arsenal
               </h2>
               <p className="text-gray-400 text-lg md:text-xl max-w-3xl leading-relaxed">

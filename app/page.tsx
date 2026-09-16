@@ -3,9 +3,8 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
-import Strength from "@/components/Strength";
-import Achievements from "@/components/Achievements";
 import Hybrid from "@/components/Hybrid";
+import SocialProof from "@/components/SocialProof";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
@@ -15,12 +14,11 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <NavBar />
       <Hero />
-      <About />
       <Projects />
       <Experience />
-      <Strength />
-      <Achievements />
       <Hybrid />
+      <About />
+      <SocialProof />
       <Contact />
       <Footer />
       <Chatbot />

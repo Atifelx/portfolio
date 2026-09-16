@@ -16,7 +16,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           <div className="font-mono text-teal-400 mb-4 tracking-wider text-sm">
-            07. What's Next?
+            06. What's Next?
           </div>
           <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tighter text-white">
             Get In Touch

@@ -43,7 +43,7 @@ export default function Hybrid() {
           className="mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 font-mono text-left">
-            <span className="text-teal-400 mr-2">06.</span> The Unfair Advantage
+            <span className="text-teal-400 mr-2">03.</span> The Unfair Advantage
           </h2>
           <div className="text-purple-400 text-xl font-medium mb-8">
             IoT + Machine Learning + Full-Stack — from silicon to AI, one engineer.

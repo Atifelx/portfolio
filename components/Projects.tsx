@@ -83,7 +83,7 @@ export default function Projects() {
           className="mb-20 text-center md:text-left"
         >
           <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white">
-            <span className="text-teal-400 mr-2 font-mono text-2xl md:text-3xl">02.</span> Build <span className="text-gradient">Impactful</span> Projects
+            <span className="text-teal-400 mr-2 font-mono text-2xl md:text-3xl">01.</span> Build <span className="text-gradient">Impactful</span> Projects
           </h2>
           <p className="text-gray-400 text-xl max-w-3xl leading-relaxed">
             These curated engineering case studies demonstrate technical depth, architectural proficiency, and the ability to design and ship production-grade AI solutions for complex enterprise environments.
