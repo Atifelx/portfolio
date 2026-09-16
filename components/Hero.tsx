@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Download, Calendar, Mail } from "lucide-react";
+import { ArrowRight, Download, Calendar, Mail, Eye } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -89,14 +89,22 @@ export default function Hero() {
             </a>
 
             <a
-              href="/Atif_Shaikh7.pdf"
-              download
+              href="/Atif_Shaikh8.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center px-8 py-4 font-bold text-gray-400 hover:text-teal-400 transition-all duration-300"
             >
+              <Eye size={20} className="mr-2" />
+              <span>View Resume</span>
+            </a>
+
+            <a
+              href="/Atif_Shaikh8.pdf"
+              download="Atif_Shaikh_Resume.pdf"
+              className="group inline-flex items-center justify-center px-8 py-4 font-bold text-gray-400 hover:text-teal-400 transition-all duration-300"
+            >
               <Download size={20} className="mr-2" />
-              <span>Resume</span>
+              <span>Download</span>
             </a>
           </motion.div>
         </div>
