@@ -4,14 +4,41 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, ArrowUpRight, Zap, ChevronDown } from "lucide-react";
 import clsx from "clsx";
+import ImageCarousel from "./ImageCarousel";
+import FineTuneDemo from "./FineTuneDemo";
 
 const projectsData = [
+  {
+    title: "TriageLens",
+    status: "Machine Learning Project",
+    featured: true,
+    fineTuneDemo: true,
+    links: { "GitHub": "https://github.com/Atifelx/AI_Triage" },
+    image: "/AITRIAGE/1.png",
+    slides: [
+      { src: "/AITRIAGE/1.png", title: "Live ticket queue" },
+      { src: "/AITRIAGE/2.png", title: "Manual triage" },
+      { src: "/AITRIAGE/3.png", title: "Evaluation dashboard" },
+    ],
+    description: "Every IT service desk faces the same bottleneck: an engineer must read each incident and judge its urgency before it can be routed — slow, inconsistent, and costly when a critical outage waits in the queue. TriageLens reads the incident and instantly suggests a P1–P4 severity, so engineers confirm instead of triaging from scratch. Rather than paying for a large LLM API, I solved it with one of the smallest open models available: Google's Gemma 3 270M plus a 2.8 MB LoRA adapter. Prompting alone scored 7%; after two fine-tuning rounds, a severity-focused adapter scored 100% on a held-out synthetic test set. Real-world tickets written in other styles are harder, so the next step is training on a larger, more varied set of real incidents. It runs locally on CPU in ~0.4 s per ticket.",
+    tech: ["Gemma 3 270M", "LoRA / PEFT", "PyTorch", "Hugging Face", "FastAPI", "Next.js"],
+    gradient: "from-teal-500/20 to-purple-500/20",
+    architectureTitle: "Why Gemma 3 270M",
+    architecture: [
+      "Smallest model that fit — a 4-label task doesn't need a large model's world knowledge",
+      "Instruction-tuned — valid JSON 99% of the time before any training",
+      "Runs on CPU at ~0.41 s per ticket — no GPU server, no paid API",
+      "LoRA trains just 0.27% of weights — a 2.8 MB, swappable adapter"
+    ]
+  },
   {
     title: "CryptoClever",
     status: "Live — Agents Trading 24/7",
     featured: true,
     links: { "Live Dashboard": "http://20.198.93.159:3000/" },
     image: "/landingimage/cryptoclever.png",
+    slides: [{ src: "/landingimage/cryptoclever.png", title: "CryptoClever — live dashboard" }],
+    slidesAspect: "2878 / 1434",
     description: "A fully autonomous multi-agent trading system where 4 LangGraph agents make independent trading decisions on Binance — no human in the loop. Two signal agents (Scalp + Long) run 24/7 on an Azure VM analyzing live market data, while 2 algo-trading agents execute real trades using their own decision logic. Each signal passes through 14 parameter checks — including live news sentiment via API, RSI/MACD/Bollinger technical indicators, and volume analysis — before firing. Agents coordinate via shared ChromaDB memory and communicate state over WebSockets. Currently hitting ~60% signal accuracy in live testing.",
     tech: ["LangGraph", "Multi-Agent", "Python", "Binance API", "Azure VM", "ChromaDB", "WebSockets", "OpenAI", "Live News API"],
     gradient: "from-rose-500/20 to-pink-500/20",
@@ -28,9 +55,11 @@ const projectsData = [
     status: "Live Production — 170+ Authors",
     featured: true,
     links: { "Try It": "http://writebookai.com" },
-    image: "/landingimage/writebookAI.png",
-    description: "An AI ghostwriting platform that extracts an author's unique 'voice DNA' — tone, rhythm, vocabulary patterns, and sentence structure — then writes full chapters that sound like the author wrote them. Built as a direct competitor to leading AI writing tools but with a key differentiator: it doesn't just generate text, it becomes a writing partner that discusses ideas, develops plot arcs, and maintains character consistency across chapters. Multi-LLM orchestration routes tasks to OpenAI, Claude, or Gemini based on the writing task. 170+ active authors using it for Amazon KDP publishing. Built-in Notion-style editor with real-time collaboration.",
-    tech: ["React", "Node.js", "PostgreSQL", "OpenAI", "Claude", "Gemini", "Multi-LLM Orchestration", "Stripe", "Voice DNA Engine"],
+    image: "/writebookaiN.png",
+    slides: [{ src: "/writebookaiN.png", title: "WriteBookAI — authority books in your voice" }],
+    slidesAspect: "2532 / 1546",
+    description: "A high-ticket AI ghostwriting platform that turns an expert's proven method into an authority book that sounds like them. AI agents run a 9-stage, ghostwriter-style process — guided interviews that uncover the author's thinking, then organizing their frameworks, stories and source material — while a Writing DNA engine recognizes 13+ voice patterns from how they already write and speak. The output is an editable manuscript and a book-led client campaign, built for coaches, consultants, course creators and B2B founders. Multi-LLM orchestration routes each stage to OpenAI, Claude or Gemini.",
+    tech: ["AI Agents", "Writing DNA Engine", "Multi-LLM Orchestration", "OpenAI", "Claude", "Gemini", "React", "Node.js", "PostgreSQL", "Stripe"],
     gradient: "from-purple-500/20 to-blue-500/20",
   },
   {
@@ -53,13 +82,23 @@ const projectsData = [
     gradient: "from-teal-500/20 to-emerald-500/20",
   },
   {
-    title: "Clevechat",
-    status: "Production",
-    links: { "Demo": "https://agent-live-vpbp.vercel.app/" },
-    image: "/landingimage/cleaverchat.png",
-    description: "RAG-based conversational AI that lets users upload any document and have a natural conversation with its contents. Handles PDFs, Word docs, and text files with semantic chunking and vector search for accurate retrieval.",
-    tech: ["Python", "LangChain", "Vector Databases", "LLM APIs", "RAG"],
+    title: "Clever RAG",
+    status: "Live Demo",
+    links: { "Try the Demo": "https://agent-live-vpbp.vercel.app/" },
+    image: "/RAG.png",
+    slides: [{ src: "/RAG.png", title: "Clever RAG — chat with your documents" }],
+    slidesAspect: "2604 / 1490",
+    description: "A retrieval-augmented generation (RAG) assistant that turns any document library into something you can talk to. Upload whole books, manuals or reports, and Clever RAG indexes them into a vector database; then ask questions in plain language and get answers grounded in the actual text, with the source document cited under every reply — so users can verify the answer instead of trusting a guess. In the demo, two full-length books (Think and Grow Rich and The 48 Laws of Power) are ingested, and asking for the 4th law of power returns Law 4, \"Always say less than necessary\", retrieved from the right book. Questions outside the uploaded documents can be answered from the live web.",
+    tech: ["Python", "LangChain", "Vector Database", "Embeddings", "LLM APIs", "RAG"],
     gradient: "from-blue-500/20 to-cyan-500/20",
+    architectureTitle: "How It Works",
+    architecture: [
+      "Ingest — upload PDF, TXT or DOCX files up to 50 MB, including full-length books",
+      "Chunk & embed — text is split into semantic chunks and stored as vectors",
+      "Retrieve — each question is matched to the most relevant passages across all documents",
+      "Answer — the LLM responds from the retrieved context and cites its source",
+      "Sessions — chat history is kept per session; the knowledge base can be reset anytime"
+    ]
   },
   {
     title: "CvstudioOrg",
@@ -72,8 +111,9 @@ const projectsData = [
   }
 ];
 
-const featuredProjects = projectsData.filter(p => p.title !== "CvstudioOrg" && p.title !== "Blago AI");
-const exploreProjects = projectsData.filter(p => p.title === "CvstudioOrg" || p.title === "Blago AI");
+const exploreTitles = ["Healthcare AI Automation", "Blago AI", "CvstudioOrg"];
+const featuredProjects = projectsData.filter(p => !exploreTitles.includes(p.title));
+const exploreProjects = projectsData.filter(p => exploreTitles.includes(p.title));
 
 function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: number }) {
   return (
@@ -123,10 +163,12 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
                     {project.description}
                   </p>
 
+                  {(project as any).fineTuneDemo && <FineTuneDemo />}
+
                   {/* Architecture Breakdown for CryptoClever */}
                   {(project as any).architecture && (
                     <div className="mb-8 p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                      <h4 className="text-sm font-mono font-bold text-teal-400 uppercase tracking-widest mb-4">Agent Architecture</h4>
+                      <h4 className="text-sm font-mono font-bold text-teal-400 uppercase tracking-widest mb-4">{(project as any).architectureTitle ?? "Agent Architecture"}</h4>
                       <div className="space-y-3">
                         {(project as any).architecture.map((line: string, aIdx: number) => (
                           <div key={aIdx} className="flex items-start gap-3">
@@ -187,14 +229,18 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
                     "absolute -inset-4 rounded-[2rem] bg-gradient-to-br opacity-0 group-hover/img:opacity-100 blur-2xl transition-opacity duration-700",
                     project.gradient
                   )} />
-                  <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-auto object-cover transition-transform duration-700 group-hover/img:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                  </div>
+                  {(project as any).slides ? (
+                    <ImageCarousel slides={(project as any).slides} alt={project.title} aspectRatio={(project as any).slidesAspect} />
+                  ) : (
+                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-auto object-cover transition-transform duration-700 group-hover/img:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                    </div>
+                  )}
                 </motion.div>
               </div>
             </motion.div>
