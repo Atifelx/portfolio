@@ -166,7 +166,7 @@ export default function SocialProof() {
               >
                 {/* Image */}
                 <div className="w-16 h-16 rounded-xl overflow-hidden border border-white/10 flex-shrink-0 bg-white/5">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover"

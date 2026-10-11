@@ -157,7 +157,7 @@ function SkillCard({ category, idx }: { category: SkillCategory; idx: number }) 
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: idx * 0.08 }}
       className={clsx(
-        "group relative rounded-2xl border backdrop-blur-sm transition-all duration-500",
+        "group relative rounded-2xl border md:backdrop-blur-sm transition-all duration-500",
         "bg-[#0a0a0a] border-white/[0.06]",
         "hover:border-white/10 hover:shadow-2xl",
       )}

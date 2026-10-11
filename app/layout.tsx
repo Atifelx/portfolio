@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${archivo.variable} ${jetbrainsMono.variable} antialiased bg-[#0a0a0a] text-white min-h-screen relative overflow-x-hidden font-sans`}
       >
-        <div className="fixed inset-0 pointer-events-none z-[-1] noise-bg opacity-[0.03]"></div>
+        <div className="hidden md:block fixed inset-0 pointer-events-none z-[-1] noise-bg opacity-[0.03]"></div>
         {children}
       </body>
     </html>

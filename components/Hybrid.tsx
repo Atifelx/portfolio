@@ -51,8 +51,8 @@ export default function Hybrid() {
 
           <div className="glass-card p-8 md:p-10 border border-white/10 bg-[#0a0a0a]/80 mb-16 relative overflow-hidden group">
             {/* Animated accent gradient */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-teal-500/20 transition-colors duration-700" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-purple-500/20 transition-colors duration-700" />
+            <div className="hidden md:block absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-teal-500/20 transition-colors duration-700" />
+            <div className="hidden md:block absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-purple-500/20 transition-colors duration-700" />
 
             <div className="flex items-center gap-4 mb-6">
               <span className="px-4 py-2 text-sm font-black tracking-wider uppercase rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30">
@@ -171,7 +171,7 @@ export default function Hybrid() {
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
           >
             <div 
-              className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
+              className="absolute inset-0 bg-black/80 md:backdrop-blur-md cursor-pointer"
               onClick={() => setSelectedImages(null)}
             />
             
@@ -196,7 +196,7 @@ export default function Hybrid() {
                 <div className={`grid gap-4 ${selectedImages.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
                   {selectedImages.map((img, i) => (
                     <div key={i} className="rounded-lg overflow-hidden border border-white/10 bg-black">
-                      <img 
+                      <img loading="lazy" decoding="async" 
                         src={img} 
                         alt="Hardware Project Detail" 
                         className="w-full h-auto object-contain max-h-[70vh] mx-auto"

@@ -10,8 +10,8 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-black"
     >
       {/* Background gradients */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[28rem] h-[28rem] bg-teal-600/20 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-purple-600/20 rounded-full blur-3xl md:blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-56 h-56 md:w-[28rem] md:h-[28rem] bg-teal-600/20 rounded-full blur-3xl md:blur-[128px] pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10 flex flex-col md:flex-row items-center">
         <div className="w-full md:w-full text-left">
@@ -74,7 +74,7 @@ export default function Hero() {
 
             <a
               href="mailto:aatif2003@gmail.com"
-              className="group inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-white/5 backdrop-blur border border-white/10 rounded-xl transition-all duration-300 hover:bg-white/10 hover:scale-105"
+              className="group inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-white/5 md:backdrop-blur border border-white/10 rounded-xl transition-all duration-300 hover:bg-white/10 hover:scale-105"
             >
               <Mail size={22} className="mr-2 text-teal-400" />
               <span>Email Me</span>

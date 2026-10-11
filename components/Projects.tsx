@@ -13,22 +13,26 @@ const projectsData = [
     status: "Machine Learning Project",
     featured: true,
     fineTuneDemo: true,
-    links: { "GitHub": "https://github.com/Atifelx/AI_Triage" },
+    links: {
+      "GitHub": "https://github.com/Atifelx/AI_Triage",
+      "Download Code + Model": "https://www.dropbox.com/scl/fo/gysi2jbvm043rygk7ag43/AIs7c81v_5BqOu4Qc8dS-hs?rlkey=wsfrjdq8yfbfnuzrsh6r5f1gc&st=z4dbmv3w&e=1&dl=0",
+    },
     image: "/AITRIAGE/1.png",
     slides: [
-      { src: "/AITRIAGE/1.png", title: "Live ticket queue" },
-      { src: "/AITRIAGE/2.png", title: "Manual triage" },
-      { src: "/AITRIAGE/3.png", title: "Evaluation dashboard" },
+      { src: "/AITRIAGE/1.png", title: "AI triage result" },
+      { src: "/AITRIAGE/2_1.png", title: "Route for human review" },
+      { src: "/AITRIAGE/4_1.png", title: "Review decision" },
+      { src: "/AITRIAGE/3_1.png", title: "Integrations" },
     ],
-    description: "Every IT service desk faces the same bottleneck: an engineer must read each incident and judge its urgency before it can be routed — slow, inconsistent, and costly when a critical outage waits in the queue. TriageLens reads the incident and instantly suggests a P1–P4 severity, so engineers confirm instead of triaging from scratch. Rather than paying for a large LLM API, I solved it with one of the smallest open models available: Google's Gemma 3 270M plus a 2.8 MB LoRA adapter. Prompting alone scored 7%; after two fine-tuning rounds, a severity-focused adapter scored 100% on a held-out synthetic test set. Real-world tickets written in other styles are harder, so the next step is training on a larger, more varied set of real incidents. It runs locally on CPU in ~0.4 s per ticket.",
+    slidesAspect: "2792 / 1590",
+    description: "AI Incident Triage is an AI-powered enterprise IT support tool that analyzes incidents, assesses their severity, identifies potential root causes, and recommends next steps. It is designed for common IT support tickets involving Microsoft 365 sign-in failures, Conditional Access, device compliance, Exchange email delivery, SharePoint permissions, Teams connectivity, network issues, and security alerts. By structuring incident information into actionable insights, it helps support teams prioritize issues, reduce manual triage effort, and route tickets to the appropriate team for human review.",
     tech: ["Gemma 3 270M", "LoRA / PEFT", "PyTorch", "Hugging Face", "FastAPI", "Next.js"],
     gradient: "from-teal-500/20 to-purple-500/20",
-    architectureTitle: "Why Gemma 3 270M",
+    architectureTitle: "How It Works",
     architecture: [
-      "Smallest model that fit — a 4-label task doesn't need a large model's world knowledge",
-      "Instruction-tuned — valid JSON 99% of the time before any training",
-      "Runs on CPU at ~0.41 s per ticket — no GPU server, no paid API",
-      "LoRA trains just 0.27% of weights — a 2.8 MB, swappable adapter"
+      "Analyze — processes incident details, affected users, services, and business impact using a fine-tuned Gemma model",
+      "Recommend — generates category, P1–P4 severity, likely root cause, supporting evidence, and recommended actions",
+      "Route — an engineer reviews the analysis and selects a destination such as Teams, CRM, ServiceNow, or Jira through mock integrations"
     ]
   },
   {
@@ -124,7 +128,7 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className={clsx(
-                "flex flex-col gap-12 items-center",
+                "flex flex-col gap-8 md:gap-12 items-center",
                 idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               )}
             >
@@ -159,7 +163,7 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
                     {project.title}
                   </h3>
 
-                  <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+                  <p className="text-gray-400 text-base md:text-xl leading-relaxed mb-8 max-w-xl">
                     {project.description}
                   </p>
 
@@ -167,7 +171,7 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
 
                   {/* Architecture Breakdown for CryptoClever */}
                   {(project as any).architecture && (
-                    <div className="mb-8 p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+                    <div className="mb-8 p-4 md:p-6 rounded-2xl bg-white/[0.03] border border-white/10">
                       <h4 className="text-sm font-mono font-bold text-teal-400 uppercase tracking-widest mb-4">{(project as any).architectureTitle ?? "Agent Architecture"}</h4>
                       <div className="space-y-3">
                         {(project as any).architecture.map((line: string, aIdx: number) => (
@@ -226,7 +230,7 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
                   className="relative group/img"
                 >
                   <div className={clsx(
-                    "absolute -inset-4 rounded-[2rem] bg-gradient-to-br opacity-0 group-hover/img:opacity-100 blur-2xl transition-opacity duration-700",
+                    "hidden md:block absolute -inset-4 rounded-[2rem] bg-gradient-to-br opacity-0 group-hover/img:opacity-100 blur-2xl transition-opacity duration-700",
                     project.gradient
                   )} />
                   {(project as any).slides ? (
@@ -236,6 +240,8 @@ function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: n
                       <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-auto object-cover transition-transform duration-700 group-hover/img:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
@@ -268,7 +274,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="space-y-40">
+        <div className="space-y-24 md:space-y-40">
           {featuredProjects.map((project, idx) => (
             <ProjectCard key={idx} project={project} idx={idx} />
           ))}
@@ -305,7 +311,7 @@ export default function Projects() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden"
             >
-              <div className="space-y-40 pt-32">
+              <div className="space-y-24 md:space-y-40 pt-24 md:pt-32">
                 {exploreProjects.map((project, idx) => (
                   <ProjectCard key={idx} project={project} idx={idx} />
                 ))}
@@ -316,8 +322,8 @@ export default function Projects() {
       </div>
 
       {/* Decorative background elements */}
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-teal-600/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="hidden md:block absolute top-1/2 left-0 w-64 h-64 bg-teal-600/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px] pointer-events-none" />
     </section>
   );
 }

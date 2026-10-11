@@ -20,7 +20,9 @@ export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       setIsScrolled(window.scrollY > 50);
 
       const sections = ["home", "about", "projects", "experience", "strength", "achievements", "hybrid", "contact"];
@@ -33,9 +35,16 @@ export default function NavBar() {
       }
       if (current) setActiveSection(current);
     };
+    // Coalesce scroll events to one update per frame
+    const handleScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   const handleNavClick = (href: string) => {
@@ -56,7 +65,7 @@ export default function NavBar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={clsx(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-black/80 backdrop-blur-xl py-4 border-b border-white/5" : "bg-transparent py-6"
+        isScrolled ? "bg-black/90 md:bg-black/80 md:backdrop-blur-xl py-4 border-b border-white/5" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-6 max-w-7xl flex justify-between items-center">
@@ -120,7 +129,7 @@ export default function NavBar() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-black/95 backdrop-blur-2xl absolute top-full left-0 right-0 py-8 flex flex-col items-center space-y-6 shadow-2xl border-t border-white/10"
+          className="md:hidden bg-black/95 absolute top-full left-0 right-0 py-8 flex flex-col items-center space-y-6 shadow-2xl border-t border-white/10"
         >
           {navLinks.map((link) => (
             <a

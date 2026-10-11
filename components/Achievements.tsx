@@ -110,7 +110,7 @@ export default function Achievements() {
                           transition={{ duration: 0.3 }}
                           className="w-full rounded-lg overflow-hidden border border-white/10 relative z-0"
                         >
-                          <img 
+                          <img loading="lazy" decoding="async" 
                             src={item.image} 
                             alt={item.title} 
                             className="w-full h-auto object-cover"

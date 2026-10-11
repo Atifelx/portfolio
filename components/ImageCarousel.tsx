@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import clsx from "clsx";
@@ -19,11 +20,11 @@ function NavButton({ dir, onClick, large }: { dir: "prev" | "next"; onClick: () 
       aria-label={dir === "prev" ? "Previous image" : "Next image"}
       className={clsx(
         "absolute top-1/2 -translate-y-1/2 z-10 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white flex items-center justify-center hover:bg-teal-400 hover:text-black hover:border-teal-400 transition-colors",
-        dir === "prev" ? (large ? "left-6" : "left-4") : (large ? "right-6" : "right-4"),
-        large ? "w-14 h-14" : "w-11 h-11"
+        dir === "prev" ? (large ? "left-2 md:left-6" : "left-2 md:left-4") : (large ? "right-2 md:right-6" : "right-2 md:right-4"),
+        large ? "w-11 h-11 md:w-14 md:h-14" : "w-8 h-8 md:w-11 md:h-11"
       )}
     >
-      <Icon size={large ? 26 : 22} />
+      <Icon size={large ? 24 : 18} />
     </button>
   );
 }
@@ -85,13 +86,15 @@ export default function ImageCarousel({ slides, alt, aspectRatio = "2584 / 1598"
       >
         <div className="relative overflow-hidden" style={{ aspectRatio }}>
           <AnimatePresence initial={false} mode="popLayout">
-            <motion.img
-              key={slide.src}
-              src={slide.src}
-              alt={`${alt} — ${slide.title}`}
-              {...slideMotion}
-              className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover/img:scale-105"
-            />
+            <motion.div key={slide.src} {...slideMotion} className="absolute inset-0">
+              <Image
+                src={slide.src}
+                alt={`${alt} — ${slide.title}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain transition-transform duration-700 group-hover/img:scale-105"
+              />
+            </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
@@ -134,7 +137,7 @@ export default function ImageCarousel({ slides, alt, aspectRatio = "2584 / 1598"
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-lg flex flex-col items-center justify-center p-6 cursor-zoom-out"
+              className="fixed inset-0 z-[100] bg-black/90 md:backdrop-blur-lg flex flex-col items-center justify-center p-3 md:p-6 cursor-zoom-out"
               role="dialog"
               aria-modal="true"
               aria-label={`${alt} — full screen`}
@@ -153,17 +156,19 @@ export default function ImageCarousel({ slides, alt, aspectRatio = "2584 / 1598"
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-7xl h-[82vh] flex items-center justify-center"
+                className="relative w-full max-w-7xl h-[70vh] md:h-[82vh] flex items-center justify-center"
               >
                 <AnimatePresence initial={false} mode="popLayout">
-                  <motion.img
-                    key={slide.src}
-                    src={slide.src}
-                    alt={`${alt} — ${slide.title}`}
-                    {...slideMotion}
-                    onClick={(e) => e.stopPropagation()}
-                    className="max-w-full max-h-full object-contain rounded-xl border border-white/10 shadow-2xl cursor-default"
-                  />
+                  <motion.div key={slide.src} {...slideMotion} className="absolute inset-0">
+                    <Image
+                      src={slide.src}
+                      alt={`${alt} — ${slide.title}`}
+                      fill
+                      sizes="100vw"
+                      onClick={(e) => e.stopPropagation()}
+                      className="object-contain cursor-default"
+                    />
+                  </motion.div>
                 </AnimatePresence>
               </motion.div>
 

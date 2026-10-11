@@ -49,7 +49,7 @@ export default function Strength() {
             
             <div className="relative group rounded-xl overflow-hidden glass-card p-2 md:p-4 border border-white/10">
               <div className="relative w-full aspect-auto rounded-lg overflow-hidden bg-white/5 border border-white/5">
-                <img 
+                <img loading="lazy" decoding="async" 
                   src="/ch1.png" 
                   alt="LinkedIn Recommendations from Dr. Chiranjiv Roy and Bilal Hameed"
                   className="w-full h-auto object-cover opacity-80 filter grayscale-[20%] transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"

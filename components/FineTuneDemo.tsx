@@ -42,11 +42,11 @@ export default function FineTuneDemo() {
   const ex = examples[i];
 
   return (
-    <div className="relative mb-8 rounded-2xl p-px overflow-hidden max-w-xl">
-      {/* Rotating gradient border */}
+    <div className="relative mb-8 rounded-2xl p-px overflow-hidden max-w-xl bg-gradient-to-br from-teal-400/70 via-purple-500/50 to-transparent sm:bg-none">
+      {/* Rotating gradient border (static gradient on mobile to save GPU) */}
       <motion.div
         aria-hidden
-        className="absolute inset-[-150%]"
+        className="hidden sm:block absolute inset-[-150%]"
         style={{ background: "conic-gradient(from 0deg, transparent 0deg, #2dd4bf 70deg, #a855f7 140deg, transparent 200deg)" }}
         animate={reduceMotion ? undefined : { rotate: 360 }}
         transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
