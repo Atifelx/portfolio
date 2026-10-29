@@ -21,7 +21,7 @@ interface Message {
 const QUICK_QUESTIONS = [
   { label: "Key Projects", text: "What are Atif's most impressive projects?" },
   { label: "Tech Stack", text: "What technical skills does Atif have?" },
-  { label: "Availability", text: "Is Atif available for remote work? What's his rate?" },
+  { label: "Availability", text: "Is Atif open to remote work or relocation?" },
   { label: "Paste a JD", text: "" },
 ];
 
@@ -29,15 +29,16 @@ function renderMarkdown(text: string): string {
   let html = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
-  html = html.replace(/`(.+?)`/g, '<code class="bg-white/10 px-1.5 py-0.5 rounded text-teal-300 text-xs">$1</code>');
+  html = html.replace(/`(.+?)`/g, '<code class="bg-surface px-1.5 py-0.5 rounded text-ink text-xs">$1</code>');
 
   html = html.replace(
     /(https?:\/\/[^\s<)]+)/g,
-    '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-teal-400 underline hover:text-teal-300 break-all">$1</a>'
+    '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cobalt underline hover:text-cobalt-deep break-all">$1</a>'
   );
 
   const lines = html.split("\n");
@@ -53,7 +54,7 @@ function renderMarkdown(text: string): string {
         result += '<ul class="space-y-1 my-2">';
         inList = true;
       }
-      result += `<li class="flex items-start gap-2"><span class="text-teal-400 mt-0.5 flex-shrink-0">▸</span><span>${bulletMatch[1]}</span></li>`;
+      result += `<li class="flex items-start gap-2"><span class="text-ink-3 mt-0.5 flex-shrink-0">•</span><span>${bulletMatch[1]}</span></li>`;
     } else {
       if (inList) {
         result += "</ul>";
@@ -62,9 +63,9 @@ function renderMarkdown(text: string): string {
       if (trimmed === "") {
         result += "<br/>";
       } else if (trimmed.startsWith("###")) {
-        result += `<p class="font-bold text-white mt-3 mb-1 text-sm">${trimmed.replace(/^###\s*/, "")}</p>`;
+        result += `<p class="font-bold text-ink mt-3 mb-1 text-sm">${trimmed.replace(/^###\s*/, "")}</p>`;
       } else if (trimmed.startsWith("##")) {
-        result += `<p class="font-bold text-white mt-3 mb-1">${trimmed.replace(/^##\s*/, "")}</p>`;
+        result += `<p class="font-bold text-ink mt-3 mb-1">${trimmed.replace(/^##\s*/, "")}</p>`;
       } else {
         result += `<p class="mb-1">${trimmed}</p>`;
       }
@@ -98,13 +99,13 @@ export default function Chatbot() {
   const welcomeMessage: Message = useMemo(() => ({
     role: "assistant",
     content:
-      "Hey! I'm **Atif Agent** 👋\n\nI can help you evaluate Atif for your role. Here's what I can do:\n\n- Walk you through his **projects & technical depth**\n- Match his skills against your **Job Description**\n- Share his **availability & rate**\n- Help you **send interest directly** to Atif\n\nWhat would you like to know?",
+      "Hey! I'm **Atif Agent** 👋\n\nI can help you evaluate Atif for your role. Here's what I can do:\n\n- Walk you through his **projects & technical depth**\n- Match his skills against your **Job Description**\n- Answer questions about his **availability**\n- Help you **send interest directly** to Atif\n\nWhat would you like to know?",
   }), []);
 
   useEffect(() => {
     const pulseTimer = setTimeout(() => {
       if (!hasAutoOpened) setShowPulse(true);
-    }, 60000);
+    }, 4 * 60_000);
 
     const autoOpenTimer = setTimeout(() => {
       if (!hasAutoOpened) {
@@ -113,7 +114,7 @@ export default function Chatbot() {
         setShowPulse(false);
         setMessages([welcomeMessage]);
       }
-    }, 120000);
+    }, 5 * 60_000);
 
     return () => {
       clearTimeout(pulseTimer);
@@ -340,17 +341,18 @@ export default function Chatbot() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={handleOpen}
-            className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-teal-500 text-black flex items-center justify-center shadow-[0_0_30px_rgba(45,212,191,0.4)] hover:bg-teal-400 hover:scale-110 transition-all duration-300"
+            aria-label="Ask Atif Agent about Atif's work"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-cobalt text-white flex items-center justify-center shadow-lg hover:bg-cobalt-deep transition-colors"
           >
             {showPulse && (
               <>
-                <span className="absolute w-full h-full rounded-full bg-teal-400 animate-ping opacity-40" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-black text-[9px] font-bold text-white flex items-center justify-center">
+                <span className="absolute w-full h-full rounded-full bg-cobalt animate-ping opacity-30" />
+                <span aria-hidden className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-paper text-[9px] font-bold text-white flex items-center justify-center">
                   1
                 </span>
               </>
             )}
-            <Bot size={28} />
+            <Bot size={26} />
           </motion.button>
         )}
       </AnimatePresence>
@@ -363,19 +365,19 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-48px)] flex flex-col rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+            className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-48px)] flex flex-col rounded-2xl overflow-hidden border border-rule bg-paper shadow-2xl"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#0a0a0a] to-[#111] px-5 py-4 flex items-center justify-between border-b border-white/10 flex-shrink-0">
+            <div className="bg-paper px-5 py-4 flex items-center justify-between border-b border-rule flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-teal-500/20 border border-teal-500/30 flex items-center justify-center">
-                  <Bot size={20} className="text-teal-400" />
+                <div className="w-10 h-10 rounded-full bg-cobalt/10 flex items-center justify-center">
+                  <Bot size={20} className="text-cobalt" />
                 </div>
                 <div>
-                  <div className="text-white font-bold text-sm">Atif Agent</div>
+                  <div className="text-ink font-bold text-sm">Atif Agent</div>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-gray-400 text-xs">
+                    <span className="w-2 h-2 bg-outcome rounded-full" />
+                    <span className="text-ink-3 text-xs">
                       AI-powered career assistant
                     </span>
                   </div>
@@ -383,14 +385,15 @@ export default function Chatbot() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white transition-colors p-1"
+                aria-label="Close chat"
+                className="text-ink-3 hover:text-ink transition-colors p-1"
               >
                 <X size={20} />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#0a0a0a]">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface">
               {messages.map((msg, idx) => (
                 <motion.div
                   key={idx}
@@ -404,8 +407,8 @@ export default function Chatbot() {
                   <div
                     className={`max-w-[88%] px-4 py-3 rounded-2xl text-[13px] leading-relaxed ${
                       msg.role === "user"
-                        ? "bg-teal-500/20 text-teal-50 border border-teal-500/20 rounded-br-md"
-                        : "bg-white/[0.04] text-gray-200 border border-white/5 rounded-bl-md"
+                        ? "bg-cobalt text-white rounded-br-md [&_a]:text-white"
+                        : "bg-paper text-ink-2 border border-rule rounded-bl-md [&_strong]:text-ink"
                     }`}
                     dangerouslySetInnerHTML={{
                       __html: renderMarkdown(msg.content),
@@ -420,12 +423,12 @@ export default function Chatbot() {
                   animate={{ opacity: 1 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-white/5 border border-white/5 px-4 py-3 rounded-2xl rounded-bl-md flex items-center gap-2">
+                  <div className="bg-paper border border-rule px-4 py-3 rounded-2xl rounded-bl-md flex items-center gap-2">
                     <Loader2
                       size={14}
-                      className="animate-spin text-teal-400"
+                      className="animate-spin text-cobalt"
                     />
-                    <span className="text-gray-400 text-xs">Thinking...</span>
+                    <span className="text-ink-3 text-xs">Thinking...</span>
                   </div>
                 </motion.div>
               )}
@@ -437,9 +440,9 @@ export default function Chatbot() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="bg-white/[0.04] border border-teal-500/20 rounded-2xl p-4 space-y-3"
+                    className="bg-paper border border-rule rounded-2xl p-4 space-y-3"
                   >
-                    <p className="text-teal-400 font-bold text-sm flex items-center gap-2">
+                    <p className="text-ink font-bold text-sm flex items-center gap-2">
                       <Mail size={14} />
                       Send Interest to Atif
                     </p>
@@ -453,7 +456,7 @@ export default function Chatbot() {
                           recruiterName: e.target.value,
                         }))
                       }
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/40"
+                      className="w-full bg-paper border border-rule rounded-lg px-3 py-2 text-sm text-ink placeholder-ink-3 focus:outline-none focus:border-cobalt"
                     />
                     <input
                       type="text"
@@ -465,7 +468,7 @@ export default function Chatbot() {
                           company: e.target.value,
                         }))
                       }
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/40"
+                      className="w-full bg-paper border border-rule rounded-lg px-3 py-2 text-sm text-ink placeholder-ink-3 focus:outline-none focus:border-cobalt"
                     />
                     <input
                       type="text"
@@ -474,7 +477,7 @@ export default function Chatbot() {
                       onChange={(e) =>
                         setEmailForm((p) => ({ ...p, role: e.target.value }))
                       }
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/40"
+                      className="w-full bg-paper border border-rule rounded-lg px-3 py-2 text-sm text-ink placeholder-ink-3 focus:outline-none focus:border-cobalt"
                     />
                     <input
                       type="email"
@@ -483,7 +486,7 @@ export default function Chatbot() {
                       onChange={(e) =>
                         setEmailForm((p) => ({ ...p, email: e.target.value }))
                       }
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/40"
+                      className="w-full bg-paper border border-rule rounded-lg px-3 py-2 text-sm text-ink placeholder-ink-3 focus:outline-none focus:border-cobalt"
                     />
                     <textarea
                       ref={textareaRef}
@@ -496,7 +499,7 @@ export default function Chatbot() {
                         }))
                       }
                       rows={2}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/40 resize-none"
+                      className="w-full bg-paper border border-rule rounded-lg px-3 py-2 text-sm text-ink placeholder-ink-3 focus:outline-none focus:border-cobalt resize-none"
                     />
                     <div className="flex gap-2">
                       <button
@@ -506,14 +509,14 @@ export default function Chatbot() {
                           !emailForm.company ||
                           !emailForm.role
                         }
-                        className="flex-1 bg-teal-500 text-black font-bold text-sm py-2.5 rounded-lg hover:bg-teal-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="flex-1 bg-cobalt text-white font-bold text-sm py-2.5 rounded-lg hover:bg-cobalt-deep transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                         <Send size={14} />
                         Send to Atif
                       </button>
                       <button
                         onClick={() => setShowEmailForm(false)}
-                        className="px-4 py-2.5 bg-white/5 text-gray-400 text-sm rounded-lg hover:bg-white/10 transition-colors"
+                        className="px-4 py-2.5 bg-surface text-ink-2 text-sm rounded-lg hover:bg-rule transition-colors"
                       >
                         Cancel
                       </button>
@@ -527,13 +530,13 @@ export default function Chatbot() {
 
             {/* Quick Actions (show at start) */}
             {messages.length <= 1 && !isLoading && (
-              <div className="px-4 pb-2 bg-[#0a0a0a] flex flex-wrap gap-2 flex-shrink-0">
+              <div className="px-4 pb-2 bg-surface flex flex-wrap gap-2 flex-shrink-0">
                 {QUICK_QUESTIONS.map((q, idx) =>
                   q.text ? (
                     <button
                       key={idx}
                       onClick={() => sendMessage(q.text)}
-                      className="text-xs px-3 py-1.5 rounded-full bg-white/5 text-gray-400 border border-white/10 hover:bg-teal-500/10 hover:text-teal-400 hover:border-teal-500/20 transition-all flex items-center gap-1"
+                      className="text-xs px-3 py-1.5 rounded-full bg-paper text-ink-2 border border-rule hover:text-cobalt hover:border-cobalt transition-colors flex items-center gap-1"
                     >
                       <ChevronRight size={10} />
                       {q.label}
@@ -547,7 +550,7 @@ export default function Chatbot() {
                         );
                         inputRef.current?.focus();
                       }}
-                      className="text-xs px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 hover:bg-purple-500/20 transition-all flex items-center gap-1"
+                      className="text-xs px-3 py-1.5 rounded-full bg-cobalt/10 text-cobalt border border-cobalt/20 hover:bg-cobalt/15 transition-colors flex items-center gap-1"
                     >
                       <FileText size={10} />
                       {q.label}
@@ -558,7 +561,7 @@ export default function Chatbot() {
             )}
 
             {/* Input + Action Buttons */}
-            <div className="bg-[#111] border-t border-white/10 p-3 flex-shrink-0">
+            <div className="bg-paper border-t border-rule p-3 flex-shrink-0">
               <div className="flex items-center gap-2">
                 <input
                   ref={inputRef}
@@ -569,13 +572,15 @@ export default function Chatbot() {
                     if (e.key === "Enter" && !e.shiftKey) sendMessage(input);
                   }}
                   placeholder="Ask about Atif's work..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/40 transition-colors"
+                  aria-label="Message Atif Agent"
+                  className="min-w-0 flex-1 bg-surface border border-rule rounded-xl px-4 py-2.5 text-sm text-ink placeholder-ink-3 focus:outline-none focus:border-cobalt transition-colors"
                   disabled={isLoading}
                 />
                 <button
                   onClick={() => sendMessage(input)}
                   disabled={!input.trim() || isLoading}
-                  className="w-10 h-10 rounded-xl bg-teal-500 text-black flex items-center justify-center hover:bg-teal-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                  aria-label="Send message"
+                  className="w-10 h-10 rounded-xl bg-cobalt text-white flex items-center justify-center hover:bg-cobalt-deep transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
                 >
                   <Send size={16} />
                 </button>
@@ -585,7 +590,7 @@ export default function Chatbot() {
                 {!emailSent && (
                   <button
                     onClick={() => setShowEmailForm(!showEmailForm)}
-                    className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-teal-400 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-ink-3 hover:text-cobalt transition-colors"
                   >
                     <Mail size={12} />
                     <span>Send Interest</span>
@@ -595,7 +600,7 @@ export default function Chatbot() {
                   href="https://calendar.app.google/VUyweT99vyAhinNV9"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-teal-400 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs text-ink-3 hover:text-cobalt transition-colors"
                 >
                   <Calendar size={12} />
                   <span>Book a Call</span>

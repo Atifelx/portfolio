@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local source files kept out of the site and git
+/_private/
+/IMG_*.HEIC
+
+# Playwright output
+/test-results/
+/playwright-report/
+
+# Tool folders that appear inside public/ (never publish them)
+/public/**/.claude/

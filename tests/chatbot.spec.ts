@@ -16,7 +16,7 @@ test.describe("Chatbot", () => {
 
     // Chat header should appear — use the header div specifically
     await expect(
-      page.locator("div.text-white.font-bold.text-sm", { hasText: "Atif Agent" })
+      page.locator("div.font-bold.text-sm", { hasText: "Atif Agent" })
     ).toBeVisible();
     await expect(page.getByText("AI-powered career assistant")).toBeVisible();
   });
@@ -119,7 +119,7 @@ test.describe("Chatbot", () => {
   test("close button hides the chat window", async ({ page }) => {
     await page.locator("button.fixed.bottom-6.right-6").click();
     await expect(
-      page.locator("div.text-white.font-bold.text-sm", { hasText: "Atif Agent" })
+      page.locator("div.font-bold.text-sm", { hasText: "Atif Agent" })
     ).toBeVisible();
 
     // Click the X close button in the header

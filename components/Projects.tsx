@@ -1,23 +1,104 @@
-"use client";
+import ImageCarousel, { type Slide } from "./ImageCarousel";
+import ChequeCaseStudy from "./ChequeCaseStudy";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight, Zap, ChevronDown } from "lucide-react";
-import clsx from "clsx";
-import ImageCarousel from "./ImageCarousel";
-import FineTuneDemo from "./FineTuneDemo";
+type Project = {
+  id: string;
+  title: string;
+  tagline: string;
+  why: string; // what this project proves, i.e. why it made the cut
+  problem: string;
+  built: string;
+  result: string;
+  note?: string;
+  tech: string[];
+  links: { label: string; href: string }[];
+  slides: Slide[];
+  slidesAspect: string;
+  results?: { label: string; value: string }[]; // measured results, shown as a small table under Result
+  caseStudy?: boolean;
+};
 
-const projectsData = [
+const projects: Project[] = [
   {
+    id: "writebookai",
+    title: "WriteBookAI",
+    tagline: "Agentic SaaS for authority books. Live in production.",
+    why: "A complete product in production: an agent pipeline, routing across three model providers, payments and real users.",
+    problem: "Coaches, consultants and founders want a book that sounds like them, but ghostwriters are slow and expensive.",
+    built:
+      "Guided interviews capture the author's thinking; agents orchestrate OpenAI, Claude and Gemini to match their voice and draft each chapter. Editable manuscript, Kindle export and Stripe billing.",
+    result: "Live at writebookai.com with 184 sign-ups, all from organic search.",
+    tech: ["AI agents", "OpenAI", "Claude", "Gemini", "React", "Node.js", "PostgreSQL", "Stripe"],
+    links: [{ label: "Visit writebookai.com", href: "https://www.writebookai.com/" }],
+    slides: [{ src: "/writebookaiN.png", title: "WriteBookAI: authority books in your voice" }],
+    slidesAspect: "2532 / 1546",
+  },
+  {
+    id: "cryptoclever",
+    title: "CryptoClever",
+    tagline: "Real-time multi-agent trading platform, running live.",
+    why: "Agents making real-time decisions around the clock, with an AI check before any signal goes out.",
+    problem: "Crypto markets move around the clock. No person can watch every chart, indicator and news headline at once.",
+    built:
+      "Agents powered by OpenAI's GPT-5.6 Sol model trade Binance spot markets: scalping agents on 1-minute candles, a support-and-resistance agent, long-term trend agents, and a news agent where the LLM scores each event +1 or -1. An AI layer double-confirms every signal before it is broadcast live to users, and an execution agent scans every Binance spot symbol and trades 24/7.",
+    result: "Two months of live testing, measured from the agents' logs and the trades they executed. Results differ by strategy:",
+    results: [
+      { label: "Long-term agent, uptrend (buy) signals", value: "72%" },
+      { label: "Support and resistance", value: "62%" },
+      { label: "Long-term agent, downtrend signals", value: "51%" },
+      { label: "Scalping", value: "45%" },
+    ],
+    tech: ["Python", "Multi-agent", "GPT-5.6 Sol", "WebSockets", "Binance API", "ChromaDB"],
+    links: [{ label: "Code on GitHub", href: "https://github.com/Atifelx/CryptoClever" }],
+    slides: [{ src: "/landingimage/cryptoclever.png", title: "CryptoClever: live agent dashboard" }],
+    slidesAspect: "2878 / 1434",
+  },
+  {
+    id: "icici-pixel",
+    title: "Cheque verification AI",
+    tagline: "Project ICiCI-pixel: five vision models, two of them fine-tuned.",
+    why: "Five models working as one system, with every model choice settled by a measured comparison.",
+    problem: "Bank staff check every cheque by hand: read the handwriting, find the account, compare the signature.",
+    built:
+      "A FastAPI and React app that runs five vision models in sequence: OCR for printed text, YOLO to find each field, a fine-tuned TrOCR for handwriting and a Siamese network for signatures. It shows every step live and ships as an offline, CPU-only Docker image.",
+    result:
+      "Handwritten amounts read correctly went from 1 of 17 to 16 of 17 after fine-tuning. Every verdict lists its reasons, and anything doubtful goes to a person.",
+    note: "Built and evaluated on synthetic test data. Not affiliated with ICICI Bank.",
+    tech: ["TrOCR", "YOLO", "EasyOCR", "PyTorch", "Hugging Face", "FastAPI", "React", "Docker"],
+    links: [
+      {
+        label: "Download app and models (Docker)",
+        href: "https://www.dropbox.com/scl/fi/rssds2c8q0pvjaxojshdc/icici-pixel.zip?rlkey=cb5q5k78wl5mk2w5r2c445de3&st=uq2wn7tn&dl=0",
+      },
+    ],
+    slides: [
+      { src: "/icicpixel/hero-1.png", title: "Watch it check a cheque", video: ["/icicpixel/demo.mp4"] },
+      { src: "/icicpixel/3.png", title: "Signature located" },
+      { src: "/icicpixel/4.png", title: "Every field with its confidence" },
+      { src: "/icicpixel/2.png", title: "Final verification report" },
+      { src: "/icicpixel/nikhil-3.png", title: "Synthetic test cheque" },
+    ],
+    slidesAspect: "3396 / 1914",
+    caseStudy: true,
+  },
+  {
+    id: "triagelens",
     title: "TriageLens",
-    status: "Machine Learning Project",
-    featured: true,
-    fineTuneDemo: true,
-    links: {
-      "GitHub": "https://github.com/Atifelx/AI_Triage",
-      "Download Code + Model": "https://www.dropbox.com/scl/fo/gysi2jbvm043rygk7ag43/AIs7c81v_5BqOu4Qc8dS-hs?rlkey=wsfrjdq8yfbfnuzrsh6r5f1gc&st=z4dbmv3w&e=1&dl=0",
-    },
-    image: "/AITRIAGE/1.png",
+    tagline: "Fine-tuned Gemma for IT incident triage.",
+    why: "Proof that a small, cheap model does the job when it is trained on the right data.",
+    problem:
+      "Service desk engineers read every incident to judge its urgency before it can be routed, so critical outages wait in the queue.",
+    built:
+      "Prompting plateaued at about 20% accuracy, so I fine-tuned Google's Gemma 3 270M on 1,500 real incident examples. When severity kept failing, I added 400 targeted examples and trained a second LoRA adapter: one base model, two specialist adapters. Engineers review each analysis before it is routed to Teams, ServiceNow, Jira or a CRM.",
+    result: "Severity accuracy rose from 7% to 89%, on a model small enough to run on a plain CPU.",
+    tech: ["Gemma 3 270M", "LoRA", "PyTorch", "Hugging Face", "FastAPI", "Next.js"],
+    links: [
+      { label: "Code on GitHub", href: "https://github.com/Atifelx/AI_Triage" },
+      {
+        label: "Download code and model",
+        href: "https://www.dropbox.com/scl/fo/gysi2jbvm043rygk7ag43/AIs7c81v_5BqOu4Qc8dS-hs?rlkey=wsfrjdq8yfbfnuzrsh6r5f1gc&st=z4dbmv3w&e=1&dl=0",
+      },
+    ],
     slides: [
       { src: "/AITRIAGE/1.png", title: "AI triage result" },
       { src: "/AITRIAGE/2_1.png", title: "Route for human review" },
@@ -25,305 +106,125 @@ const projectsData = [
       { src: "/AITRIAGE/3_1.png", title: "Integrations" },
     ],
     slidesAspect: "2792 / 1590",
-    description: "AI Incident Triage is an AI-powered enterprise IT support tool that analyzes incidents, assesses their severity, identifies potential root causes, and recommends next steps. It is designed for common IT support tickets involving Microsoft 365 sign-in failures, Conditional Access, device compliance, Exchange email delivery, SharePoint permissions, Teams connectivity, network issues, and security alerts. By structuring incident information into actionable insights, it helps support teams prioritize issues, reduce manual triage effort, and route tickets to the appropriate team for human review.",
-    tech: ["Gemma 3 270M", "LoRA / PEFT", "PyTorch", "Hugging Face", "FastAPI", "Next.js"],
-    gradient: "from-teal-500/20 to-purple-500/20",
-    architectureTitle: "How It Works",
-    architecture: [
-      "Analyze — processes incident details, affected users, services, and business impact using a fine-tuned Gemma model",
-      "Recommend — generates category, P1–P4 severity, likely root cause, supporting evidence, and recommended actions",
-      "Route — an engineer reviews the analysis and selects a destination such as Teams, CRM, ServiceNow, or Jira through mock integrations"
-    ]
   },
-  {
-    title: "CryptoClever",
-    status: "Live — Agents Trading 24/7",
-    featured: true,
-    links: { "Live Dashboard": "http://20.198.93.159:3000/" },
-    image: "/landingimage/cryptoclever.png",
-    slides: [{ src: "/landingimage/cryptoclever.png", title: "CryptoClever — live dashboard" }],
-    slidesAspect: "2878 / 1434",
-    description: "A fully autonomous multi-agent trading system where 4 LangGraph agents make independent trading decisions on Binance — no human in the loop. Two signal agents (Scalp + Long) run 24/7 on an Azure VM analyzing live market data, while 2 algo-trading agents execute real trades using their own decision logic. Each signal passes through 14 parameter checks — including live news sentiment via API, RSI/MACD/Bollinger technical indicators, and volume analysis — before firing. Agents coordinate via shared ChromaDB memory and communicate state over WebSockets. Currently hitting ~60% signal accuracy in live testing.",
-    tech: ["LangGraph", "Multi-Agent", "Python", "Binance API", "Azure VM", "ChromaDB", "WebSockets", "OpenAI", "Live News API"],
-    gradient: "from-rose-500/20 to-pink-500/20",
-    architecture: [
-      "Signal Agent (Scalp) — scans 1m/5m candles, fires short-term entries",
-      "Signal Agent (Long) — analyzes 1h/4h trends for swing positions",
-      "Algo Agent 1 — executes market orders on Binance with stop-loss logic",
-      "Algo Agent 2 — manages position sizing and portfolio risk",
-      "Shared Memory — ChromaDB stores agent decisions for cross-agent reasoning"
-    ]
-  },
-  {
-    title: "WriteBookAI",
-    status: "Live Production — 170+ Authors",
-    featured: true,
-    links: { "Try It": "http://writebookai.com" },
-    image: "/writebookaiN.png",
-    slides: [{ src: "/writebookaiN.png", title: "WriteBookAI — authority books in your voice" }],
-    slidesAspect: "2532 / 1546",
-    description: "A high-ticket AI ghostwriting platform that turns an expert's proven method into an authority book that sounds like them. AI agents run a 9-stage, ghostwriter-style process — guided interviews that uncover the author's thinking, then organizing their frameworks, stories and source material — while a Writing DNA engine recognizes 13+ voice patterns from how they already write and speak. The output is an editable manuscript and a book-led client campaign, built for coaches, consultants, course creators and B2B founders. Multi-LLM orchestration routes each stage to OpenAI, Claude or Gemini.",
-    tech: ["AI Agents", "Writing DNA Engine", "Multi-LLM Orchestration", "OpenAI", "Claude", "Gemini", "React", "Node.js", "PostgreSQL", "Stripe"],
-    gradient: "from-purple-500/20 to-blue-500/20",
-  },
-  {
-    title: "Healthcare AI Automation",
-    status: "Enterprise Production",
-    featured: true,
-    links: {},
-    image: "/n8n.png",
-    description: "Enterprise healthcare automation built for a real client — uses LLMs with Agentic RAG and n8n workflow orchestration to monitor patient health scores daily. When scores fall below clinical thresholds, the system triggers automated alerts to care teams with contextual recommendations pulled from the patient's medical history via RAG. End-to-end: data ingestion, LLM reasoning, alert routing, and clinician dashboards.",
-    tech: ["n8n", "LLM", "Agentic RAG", "AI Agents", "Python", "Healthcare"],
-    gradient: "from-cyan-500/20 to-blue-500/20",
-  },
-  {
-    title: "Blago AI",
-    status: "Production",
-    links: { "App Landing": "https://seo-ai-eppw.vercel.app/", "Dashboard": "https://seo-ai-eppw.vercel.app/tester-login" },
-    image: "/landingimage/blagoAi.png",
-    description: "AI-powered SEO content platform that generates human-style, undetectable content and publishes directly to WordPress — all within the app. Built for content teams who need to scale organic traffic without sounding robotic.",
-    tech: ["Google Gemini", "React", "WordPress API", "SEO Optimization"],
-    gradient: "from-teal-500/20 to-emerald-500/20",
-  },
-  {
-    title: "Clever RAG",
-    status: "Live Demo",
-    links: { "Try the Demo": "https://agent-live-vpbp.vercel.app/" },
-    image: "/RAG.png",
-    slides: [{ src: "/RAG.png", title: "Clever RAG — chat with your documents" }],
-    slidesAspect: "2604 / 1490",
-    description: "A retrieval-augmented generation (RAG) assistant that turns any document library into something you can talk to. Upload whole books, manuals or reports, and Clever RAG indexes them into a vector database; then ask questions in plain language and get answers grounded in the actual text, with the source document cited under every reply — so users can verify the answer instead of trusting a guess. In the demo, two full-length books (Think and Grow Rich and The 48 Laws of Power) are ingested, and asking for the 4th law of power returns Law 4, \"Always say less than necessary\", retrieved from the right book. Questions outside the uploaded documents can be answered from the live web.",
-    tech: ["Python", "LangChain", "Vector Database", "Embeddings", "LLM APIs", "RAG"],
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    architectureTitle: "How It Works",
-    architecture: [
-      "Ingest — upload PDF, TXT or DOCX files up to 50 MB, including full-length books",
-      "Chunk & embed — text is split into semantic chunks and stored as vectors",
-      "Retrieve — each question is matched to the most relevant passages across all documents",
-      "Answer — the LLM responds from the retrieved context and cites its source",
-      "Sessions — chat history is kept per session; the knowledge base can be reset anytime"
-    ]
-  },
-  {
-    title: "CvstudioOrg",
-    status: "Open Source",
-    links: { "Web": "https://cvstudio.org" },
-    image: "/landingimage/cvstudio.png",
-    description: "Open-source, free resume builder with modern templates and real-time preview.",
-    tech: ["Next.js", "TailwindCSS"],
-    gradient: "from-orange-500/20 to-amber-500/20",
-  }
 ];
 
-const exploreTitles = ["Healthcare AI Automation", "Blago AI", "CvstudioOrg"];
-const featuredProjects = projectsData.filter(p => !exploreTitles.includes(p.title));
-const exploreProjects = projectsData.filter(p => exploreTitles.includes(p.title));
+const moreProjects = [
+  {
+    title: "Clever RAG",
+    text: "Chat with your own documents, with sources. Upload PDFs, Word files or whole books; every answer cites the document it came from, and questions outside the library go to live web search.",
+    link: { label: "Try the live demo", href: "https://agent-live-vpbp.vercel.app/" },
+  },
+];
 
-function ProjectCard({ project, idx }: { project: typeof projectsData[0]; idx: number }) {
+const linkClass = "font-medium text-ink underline decoration-rule decoration-2 underline-offset-[6px] hover:decoration-cobalt";
+
+function ProjectRow({ project }: { project: Project }) {
   return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className={clsx(
-                "flex flex-col gap-8 md:gap-12 items-center",
-                idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-              )}
-            >
-              {/* Text Side */}
-              <div className="w-full md:w-1/2">
-                <motion.div
-                  initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    {(project as any).featured && (
-                      <span className="px-3 py-1 text-xs font-bold tracking-wider uppercase rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30 flex items-center gap-1.5">
-                        <Zap size={12} className="fill-amber-400" />
-                        Featured
-                      </span>
-                    )}
-                    <span className={clsx(
-                      "px-4 py-1.5 text-xs font-mono font-bold tracking-wider uppercase rounded-full border",
-                      project.status.includes("Live")
-                        ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                        : "bg-teal-500/10 text-teal-400 border-teal-500/20"
-                    )}>
-                      {project.status.includes("Live") && (
-                        <span className="inline-block w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse" />
-                      )}
-                      {project.status}
-                    </span>
-                  </div>
+    <article id={project.id} className="grid grid-cols-1 gap-8 border-t border-rule py-14 md:grid-cols-12 md:gap-12 md:py-20">
+      <div className="min-w-0 md:col-span-5">
+        <h3 className="text-3xl font-bold tracking-tight md:text-4xl">{project.title}</h3>
+        <p className="mt-2 text-ink-3">{project.tagline}</p>
+        <p className="mt-4 border-l-2 border-cobalt pl-3 text-sm leading-relaxed text-ink-2">
+          <span className="font-semibold text-ink">Why it&apos;s here: </span>
+          {project.why}
+        </p>
 
-                  <h3 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-gray-400 text-base md:text-xl leading-relaxed mb-8 max-w-xl">
-                    {project.description}
-                  </p>
-
-                  {(project as any).fineTuneDemo && <FineTuneDemo />}
-
-                  {/* Architecture Breakdown for CryptoClever */}
-                  {(project as any).architecture && (
-                    <div className="mb-8 p-4 md:p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-                      <h4 className="text-sm font-mono font-bold text-teal-400 uppercase tracking-widest mb-4">{(project as any).architectureTitle ?? "Agent Architecture"}</h4>
-                      <div className="space-y-3">
-                        {(project as any).architecture.map((line: string, aIdx: number) => (
-                          <div key={aIdx} className="flex items-start gap-3">
-                            <span className="mt-1 w-6 h-6 rounded-md bg-gradient-to-br from-rose-500/20 to-pink-500/20 border border-rose-500/20 flex items-center justify-center text-xs font-bold text-rose-400 flex-shrink-0">
-                              {aIdx + 1}
-                            </span>
-                            <span className="text-sm text-gray-300 leading-relaxed">{line}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="flex flex-wrap gap-2 mb-10">
-                    {project.tech.map((tech, tIdx) => (
-                      <span key={tIdx} className={clsx(
-                        "px-4 py-2 text-sm font-mono rounded-lg border transition-colors",
-                        (project as any).featured
-                          ? "text-gray-300 bg-white/[0.07] border-white/15 hover:border-teal-500/40 hover:text-teal-300"
-                          : "text-gray-400 bg-white/5 border-white/10 hover:border-teal-500/30"
-                      )}>
-                        {tech}
-                      </span>
+        <dl className="mt-8 space-y-5 leading-relaxed">
+          <div>
+            <dt className="font-semibold">Problem</dt>
+            <dd className="mt-1 text-ink-2">{project.problem}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">What I built</dt>
+            <dd className="mt-1 text-ink-2">{project.built}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Result</dt>
+            <dd className="mt-1 font-medium text-outcome">{project.result}</dd>
+            {project.results && (
+              <dd className="mt-3">
+                <table className="w-full text-sm">
+                  <caption className="sr-only">Signal accuracy by strategy</caption>
+                  <thead className="sr-only">
+                    <tr>
+                      <th>Strategy</th>
+                      <th>Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {project.results.map((r) => (
+                      <tr key={r.label} className="border-t border-rule">
+                        <td className="py-2 pr-4 text-ink-2">{r.label}</td>
+                        <td className="py-2 text-right font-semibold tabular-nums">{r.value}</td>
+                      </tr>
                     ))}
-                  </div>
+                  </tbody>
+                </table>
+              </dd>
+            )}
+          </div>
+        </dl>
 
-                  <div className="flex flex-wrap gap-4">
-                    {Object.entries(project.links).map(([key, url]) => (
-                      <a
-                        key={key}
-                        href={url as string}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={clsx(
-                          "group inline-flex items-center gap-2 px-8 py-4 font-bold rounded-2xl transition-all duration-300 hover:-translate-y-1",
-                          (project as any).featured
-                            ? "text-black bg-teal-400 hover:bg-teal-300 hover:shadow-[0_10px_40px_-10px_rgba(45,212,191,0.5)]"
-                            : "text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]"
-                        )}
-                      >
-                        <span>{key}</span>
-                        <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
+        <p className="mt-6 text-sm text-ink-3">Built with {project.tech.join(", ")}</p>
 
-              {/* Image Side */}
-              <div className="w-full md:w-1/2">
-                <motion.div
-                  initial={{ opacity: 0, scale: 1.1 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative group/img"
-                >
-                  <div className={clsx(
-                    "hidden md:block absolute -inset-4 rounded-[2rem] bg-gradient-to-br opacity-0 group-hover/img:opacity-100 blur-2xl transition-opacity duration-700",
-                    project.gradient
-                  )} />
-                  {(project as any).slides ? (
-                    <ImageCarousel slides={(project as any).slides} alt={project.title} aspectRatio={(project as any).slidesAspect} />
-                  ) : (
-                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-auto object-cover transition-transform duration-700 group-hover/img:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                    </div>
-                  )}
-                </motion.div>
-              </div>
-            </motion.div>
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+          {project.links.map((link) => (
+            <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              {link.label}
+            </a>
+          ))}
+          {project.caseStudy && <ChequeCaseStudy className={`${linkClass} cursor-pointer`} />}
+        </div>
+
+        {project.note && <p className="mt-6 text-sm text-ink-3">{project.note}</p>}
+      </div>
+
+      <div className="min-w-0 md:col-span-7">
+        <ImageCarousel slides={project.slides} alt={project.title} aspectRatio={project.slidesAspect} />
+      </div>
+    </article>
   );
 }
 
 export default function Projects() {
-  const [showExplore, setShowExplore] = useState(false);
-
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-black">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20 text-center md:text-left"
-        >
-          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white">
-            <span className="text-teal-400 mr-2 font-mono text-2xl md:text-3xl">01.</span> Build <span className="text-gradient">Impactful</span> Projects
-          </h2>
-          <p className="text-gray-400 text-xl max-w-3xl leading-relaxed">
-            These curated engineering case studies demonstrate technical depth, architectural proficiency, and the ability to design and ship production-grade AI solutions for complex enterprise environments.
+    <section id="work" className="w-full py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="max-w-[62ch]">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Selected work</h2>
+          <p className="mt-4 text-lg leading-relaxed text-ink-2">
+            Four projects, each chosen to show a different part of the job: two agent platforms running live, and two
+            fine-tuned models with measured results. All four built end to end, from the problem to a working system.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="space-y-24 md:space-y-40">
-          {featuredProjects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} idx={idx} />
+        <div className="mt-10">
+          {projects.map((project) => (
+            <ProjectRow key={project.id} project={project} />
           ))}
         </div>
 
-        {/* Explore More */}
-        <div className="mt-32 text-center">
-          <button
-            onClick={() => setShowExplore(!showExplore)}
-            className={clsx(
-              "group inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-300",
-              showExplore
-                ? "bg-teal-400/10 text-teal-400 border border-teal-400/30"
-                : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20"
-            )}
-          >
-            <span>{showExplore ? "Hide Projects" : "Explore More Projects"}</span>
-            <ChevronDown
-              size={22}
-              className={clsx(
-                "transition-transform duration-300",
-                showExplore && "rotate-180"
-              )}
-            />
-          </button>
+        <div className="border-t border-rule pt-10">
+          <h3 className="text-xl font-semibold tracking-tight">Also built</h3>
+          <ul className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
+            {moreProjects.map((p) => (
+              <li key={p.title} className="leading-relaxed">
+                <span className="font-semibold">{p.title}. </span>
+                <span className="text-ink-2">{p.text}</span>
+                {p.link && (
+                  <>
+                    {" "}
+                    <a href={p.link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                      {p.link.label}
+                    </a>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <AnimatePresence>
-          {showExplore && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="space-y-24 md:space-y-40 pt-24 md:pt-32">
-                {exploreProjects.map((project, idx) => (
-                  <ProjectCard key={idx} project={project} idx={idx} />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-
-      {/* Decorative background elements */}
-      <div className="hidden md:block absolute top-1/2 left-0 w-64 h-64 bg-teal-600/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px] pointer-events-none" />
     </section>
   );
 }

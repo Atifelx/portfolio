@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
+  axes: ["opsz", "wdth"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const title = "Atif Shaikh, Forward Deployed Engineer";
+const description =
+  "Forward deployed engineer open to remote roles in the US and Europe: full-stack, AI agents, RAG and fine-tuning. Lead developer of a multi-agent assistant in production for Procter & Gamble.";
 
 export const metadata: Metadata = {
-  title: "Atif Shaikh | Forward Deployed Engineer",
-  description: "Portfolio of Atif Shaikh - Engineer deploying AI solutions for enterprise clients.",
+  title,
+  description,
+  openGraph: { title, description, type: "website" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function RootLayout({
@@ -25,11 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body
-        className={`${archivo.variable} ${jetbrainsMono.variable} antialiased bg-[#0a0a0a] text-white min-h-screen relative overflow-x-hidden font-sans`}
-      >
-        <div className="hidden md:block fixed inset-0 pointer-events-none z-[-1] noise-bg opacity-[0.03]"></div>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${bricolage.variable} font-sans antialiased bg-paper text-ink min-h-screen overflow-x-hidden`}>
         {children}
       </body>
     </html>
