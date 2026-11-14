@@ -121,8 +121,8 @@ export default function About() {
               </p>
               <p>
                 I started on the client side, six years at Etisalat in Dubai between enterprise customers and engineering
-                teams. Since 2019 I&apos;ve built software for clients as an independent engineer and led customer-facing
-                Microsoft 365 work for Sherweb. Today I&apos;m a senior software engineer at LTIMindtree, shipping an
+                teams. Since 2019 I&apos;ve built software for clients as an independent engineer and worked as a software
+                engineer and customer-facing team lead at Sherweb. Today I&apos;m a senior software engineer at LTIMindtree, shipping an
                 agentic RAG assistant to production for a Fortune 500 consumer-goods client. I also run WriteBookAI, my
                 own product, in production on Google Cloud.
               </p>

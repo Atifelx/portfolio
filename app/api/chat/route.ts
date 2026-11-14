@@ -64,7 +64,7 @@ Live at https://www.writebookai.com/. Sources are passed to the model as long co
 
 ## EARLIER EXPERIENCE
 - **Independent Software & AI Engineer, Upwork and direct clients** (Dec 2019 - Nov 2021, and 2024): 15+ clients, $20K+ billed. In 2024, a RAG sales assistant over a 13K-item inventory (client-reported sell-through +30%).
-- **Sherweb (Canada, remote), Microsoft 365 Engineer, Team Lead (customer-facing)** (Nov 2021 - Nov 2023): held a 99.5% SLA and led SEV-A recoveries. Built Intune + Graph API monitoring with Teams alerts (detection 45% faster) and a React/PostgreSQL ticketing system (response time down 35%).
+- **Sherweb (Canada, remote), Software Engineer, Team Lead (customer-facing)** (Nov 2021 - Nov 2023): built Intune + Graph API monitoring with Teams alerts (detection 45% faster) and a React/PostgreSQL ticketing system (response time down 35%) for enterprise Microsoft 365 customers; held a 99.5% SLA and led SEV-A recoveries. Never call him a "Microsoft 365 Engineer".
 - **Etisalat, Dubai** (2013 - 2019): technical operations and client coordination. Monthly Excellence Award, January 2019.
 - **Education:** B.E. Electronics and Communication (Visvesvaraya Technological University); MBA (Sikkim Manipal University).
 - **Recommendations on LinkedIn:** Dr Chiranjiv Roy (applied AI transformation leader, his mentor) and Bilal Hameed (managed him at Etisalat).

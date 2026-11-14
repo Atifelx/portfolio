@@ -53,17 +53,17 @@ const chapters = [
     color: "#1f5fae",
     textColor: "#1f5fae",
     company: "Sherweb",
-    role: "Microsoft 365 Engineer, Team Lead (customer-facing)",
+    role: "Software Engineer, Team Lead (customer-facing)",
     years: "2021 – 2023",
     place: "Canada, remote",
-    short: "Customer engineering",
+    short: "Software engineering",
     story: "Engineering in front of the customer",
     narrative:
-      "Team lead for enterprise Microsoft 365 tenants (Exchange, SharePoint, Teams, Azure AD). I led live diagnosis with customer IT teams, then turned the problems that kept coming back into software.",
+      "Software engineer and team lead on the customer-facing side. I built software for the problems enterprise customers kept hitting on their Microsoft 365 tenants, and led live diagnosis with their IT teams.",
     highlights: [
-      "Held a 99.5% SLA and led SEV-A recoveries",
       "Intune and Graph API monitoring with Teams alerts: detection 45% faster",
       "React and PostgreSQL ticketing system: response time down 35%",
+      "Held a 99.5% SLA and led SEV-A recoveries",
     ],
   },
   {
