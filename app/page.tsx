@@ -1,7 +1,9 @@
 import NavBar from "@/components/NavBar";
 import Hero from "@/components/Hero";
+import ProofMatrix from "@/components/ProofMatrix";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
+import HowIWork from "@/components/HowIWork";
 import About from "@/components/About";
 import Recommendations from "@/components/Recommendations";
 import Contact from "@/components/Contact";
@@ -14,8 +16,10 @@ export default function Home() {
       <NavBar />
       <main>
         <Hero />
+        <ProofMatrix />
         <Projects />
         <Experience />
+        <HowIWork />
         <About />
         <Recommendations />
         <Contact />

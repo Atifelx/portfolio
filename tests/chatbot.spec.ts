@@ -46,10 +46,11 @@ test.describe("Chatbot", () => {
     await page.locator("button.fixed.bottom-6.right-6").click();
 
     await expect(page.getByRole("button", { name: "Send Interest" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Book a Call" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Book a Call", exact: true })).toBeVisible();
   });
 
   test("can type and send a message", async ({ page }) => {
+    test.skip(!process.env.OPEN_ROUTER, "Calls the live chat API; set OPEN_ROUTER to run it");
     await page.locator("button.fixed.bottom-6.right-6").click();
 
     const input = page.getByPlaceholder("Ask about Atif's work...");
@@ -123,7 +124,7 @@ test.describe("Chatbot", () => {
     ).toBeVisible();
 
     // Click the X close button in the header
-    await page.locator(".border-b.border-white\\/10 button").click();
+    await page.getByRole("button", { name: "Close chat" }).click();
 
     // Chat window should be gone, floating button should return
     await expect(page.getByText("AI-powered career assistant")).not.toBeVisible();
@@ -131,6 +132,7 @@ test.describe("Chatbot", () => {
   });
 
   test("sends a quick question when clicked", async ({ page }) => {
+    test.skip(!process.env.OPEN_ROUTER, "Calls the live chat API; set OPEN_ROUTER to run it");
     await page.locator("button.fixed.bottom-6.right-6").click();
 
     await page.getByRole("button", { name: "Key Projects" }).click();
@@ -143,7 +145,7 @@ test.describe("Chatbot", () => {
   test("Book a Call link has correct href", async ({ page }) => {
     await page.locator("button.fixed.bottom-6.right-6").click();
 
-    const bookLink = page.getByRole("link", { name: "Book a Call" });
+    const bookLink = page.getByRole("link", { name: "Book a Call", exact: true });
     await expect(bookLink).toHaveAttribute(
       "href",
       "https://calendar.app.google/VUyweT99vyAhinNV9"
@@ -152,6 +154,7 @@ test.describe("Chatbot", () => {
   });
 
   test("API responds to chat message", async ({ page }) => {
+    test.skip(!process.env.OPEN_ROUTER, "Calls the live chat API; set OPEN_ROUTER to run it");
     await page.locator("button.fixed.bottom-6.right-6").click();
 
     const input = page.getByPlaceholder("Ask about Atif's work...");

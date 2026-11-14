@@ -12,7 +12,6 @@ const LOGOS: Record<string, Logo> = {
   upwork: { src: "/logos/upwork.png", alt: "Upwork", w: 369, h: 246 },
   sherweb: { src: "/logos/sherweb.png", alt: "Sherweb", w: 900, h: 245 },
   ltm: { src: "/logos/ltm.png", alt: "LTIMindtree", w: 1200, h: 461 },
-  pg: { src: "/logos/pg.png", alt: "Procter & Gamble", w: 319, h: 158 },
 };
 
 // Oldest first: the story reads left to right along the arrow (bottom to top on narrow screens).
@@ -38,15 +37,15 @@ const chapters = [
     logo: LOGOS.upwork,
     color: "#14a800",
     textColor: "#0f7a0a",
-    company: "Upwork",
-    role: "Freelance Software Engineer",
+    company: "Independent (Upwork + direct clients)",
+    role: "Independent Software Engineer",
     years: "2019 – 2021",
     place: "Remote",
-    short: "Freelance builds",
+    short: "Independent engineer",
     story: "Switching to engineering",
     narrative:
-      "I moved from coordinating engineers to being one: two years of full-stack React and WooCommerce builds with payments and analytics for clients around the world.",
-    highlights: ["15+ clients delivered", "$20K+ earned"],
+      "I moved from coordinating engineers to being one: two years running my own client work, full-stack React and WooCommerce builds with payments and analytics for clients around the world. I owned each job from scoping to handover.",
+    highlights: ["15+ clients delivered", "$20K+ billed"],
   },
   {
     id: "chapter-sherweb",
@@ -54,13 +53,13 @@ const chapters = [
     color: "#1f5fae",
     textColor: "#1f5fae",
     company: "Sherweb",
-    role: "Software Engineer, Enterprise Microsoft 365",
+    role: "Microsoft 365 Engineer, Team Lead (customer-facing)",
     years: "2021 – 2023",
     place: "Canada, remote",
     short: "Customer engineering",
     story: "Engineering in front of the customer",
     narrative:
-      "Customer-facing engineer for enterprise Microsoft 365 tenants (Exchange, SharePoint, Teams, Azure AD). I diagnosed issues live with customer IT teams, then turned the problems that kept coming back into software.",
+      "Team lead for enterprise Microsoft 365 tenants (Exchange, SharePoint, Teams, Azure AD). I led live diagnosis with customer IT teams, then turned the problems that kept coming back into software.",
     highlights: [
       "Held a 99.5% SLA and led SEV-A recoveries",
       "Intune and Graph API monitoring with Teams alerts: detection 45% faster",
@@ -72,34 +71,33 @@ const chapters = [
     logo: LOGOS.upwork,
     color: "#14a800",
     textColor: "#0f7a0a",
-    company: "Upwork",
-    role: "Freelance AI Engineer",
+    company: "Independent (Upwork + direct clients)",
+    role: "Independent AI Engineer",
     years: "2024",
     place: "Remote",
     short: "First AI build",
     story: "Into AI, with a result to show",
     narrative:
-      "Built a RAG sales assistant over a 13,000-item inventory, used for demand forecasting and stock optimization.",
-    highlights: ["Sell-through up 30%"],
+      "Built a RAG sales assistant over a 13K-item inventory, used for demand forecasting and stock optimization.",
+    highlights: ["Client-reported sell-through up 30%"],
   },
   {
     id: "chapter-ltimindtree",
     logo: LOGOS.ltm,
-    client: LOGOS.pg,
     color: "#f26b5f",
     textColor: "#c2410c",
     company: "LTIMindtree",
-    role: "Software Engineer, Enterprise AI",
+    role: "Senior Software Engineer, Enterprise AI",
     years: "2024 – now",
-    place: "Client: Procter & Gamble",
-    short: "Production AI for P&G",
-    story: "Leading a multi-agent system into production",
+    place: "Client: Fortune 500 consumer-goods company",
+    short: "Production AI for a Fortune 500 client",
+    story: "Taking an agentic RAG assistant into production",
     narrative:
-      "Lead developer of a four-agent assistant built in LangGraph and deployed on Google Vertex AI for Procter & Gamble. I took it from solution design to production and translated P&G's business rules into agent behavior.",
+      "A production agentic RAG assistant for a Fortune 500 consumer-goods client: four agents in LangGraph on Google Vertex AI, with Gemini 2.5 Flash. I built the fourth agent, completed the graph orchestration and took it from client demo to production.",
     highlights: [
-      "Designed the agent graph: an intent agent routes requests, a retrieval agent queries the client's Azure AI Search through MCP, and a resolver proposes solutions",
-      "Fixed intent identification and the JSON data processing and mapping behind it: accuracy rose from 67% to 92%, holding up on most edge cases",
-      "Evals and tracing in Arize Phoenix to find and fix routing failures on open-ended questions, off-topic input and file uploads",
+      "Built the fourth agent and completed the graph orchestration: intent routing, a retrieval agent that queries the client's Azure AI Search through MCP, and a resolver",
+      "Took it from client demo to production, with business rules turned into agent behavior and structured JSON outputs",
+      "About 70% intent accuracy on open-ended questions in team evals",
     ],
     stack: "Google Vertex AI, LangGraph, Gemini 2.5 Flash, Azure AI Search, MCP",
     diagram: true,
@@ -148,18 +146,17 @@ function LogoCard({ logo, className }: { logo: Logo; className: string }) {
 }
 
 const FLOW = [
-  { title: "Intent agent", text: "Identifies what the user wants and processes and maps the JSON data" },
-  { title: "Specialist agents", text: "A retrieval agent queries the client's Azure AI Search (RAG) through MCP tool nodes" },
-  { title: "Resolver agent", text: "Updates the graph state and proposes a solution" },
+  { title: "Intent agent", text: "Routes the request by what the user wants" },
+  { title: "Retrieval agent", text: "Queries the client's Azure AI Search through MCP" },
+  { title: "Resolver agent", text: "Proposes a solution as structured JSON" },
 ];
 
-// Simplified view of the P&G assistant: no client data, only the shape of the agent graph
+// Generic view of the client assistant: no client data, only the shape of the agent graph
 function AgentDiagram() {
   return (
     <figure className="mt-8 rounded-xl border border-rule bg-surface p-5">
       <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-        <span className="font-semibold">How the assistant works</span>
-        <span className="text-sm text-ink-3">Simplified; no client data</span>
+        <span className="font-semibold">How the assistant works (generic; no client data)</span>
       </figcaption>
       <ol className="mt-4 flex flex-col items-stretch gap-2 md:flex-row md:items-center">
         <li className="flex items-center justify-center rounded-full border border-rule bg-paper px-4 py-2 text-sm font-medium">
@@ -177,7 +174,7 @@ function AgentDiagram() {
         ))}
       </ol>
       <p className="mt-3 rounded-lg bg-paper px-3 py-2 text-center text-sm text-ink-2">
-        LangGraph on Google Vertex AI with Gemini 2.5 Flash. Every step traced and evaluated in Arize Phoenix.
+        LangGraph on Google Vertex AI with Gemini 2.5 Flash.
       </p>
     </figure>
   );
@@ -193,14 +190,6 @@ function ChapterDetail({ c, index, compact }: { c: Chapter; index: number; compa
             <span className="flex h-14 w-32 items-center justify-center rounded-xl border border-rule bg-paper px-3 py-2">
               <LogoCard logo={c.logo} className="h-full w-full" />
             </span>
-            {"client" in c && c.client && (
-              <span className="flex items-center gap-2 text-sm text-ink-3">
-                for
-                <span className="flex h-14 w-24 items-center justify-center rounded-xl border border-rule bg-paper px-3 py-2">
-                  <LogoCard logo={c.client} className="h-full w-full" />
-                </span>
-              </span>
-            )}
           </div>
         )}
         <p className="font-semibold">{c.company}</p>
@@ -472,14 +461,6 @@ function VerticalJourney({ active, setActive }: { active: number; setActive: (i:
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <div className="border-t border-rule px-4 pb-5 pt-4">
-                        {"client" in ch && ch.client && (
-                          <p className="mb-3 flex items-center gap-2 text-sm text-ink-3">
-                            Client
-                            <span className="flex h-9 w-16 items-center justify-center rounded-lg border border-rule bg-paper px-2 py-1.5">
-                              <LogoCard logo={ch.client} className="h-full w-full" />
-                            </span>
-                          </p>
-                        )}
                         <ChapterDetail c={ch} index={i} compact />
                       </div>
                     </motion.div>
@@ -504,8 +485,8 @@ export default function Experience() {
         <div className="max-w-[62ch]">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Experience</h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-2">
-            From the client side to leading AI in production: 10+ years with enterprise customers, the last 5+ as a
-            hands-on engineer.
+            From the client side to shipping AI in production: 10+ years with enterprise customers, building software
+            since 2019.
           </p>
         </div>
 

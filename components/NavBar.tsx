@@ -7,6 +7,7 @@ import { BOOKING_URL } from "@/lib/profile";
 
 // Listed in page order: the scroll-spy relies on it
 const navLinks = [
+  { name: "Proof", href: "#proof" },
   { name: "Work", href: "#work" },
   { name: "Experience", href: "#experience" },
   { name: "About", href: "#about" },

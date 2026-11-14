@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Private notes and resume tooling, not part of the site
+    "_private/**",
+    ".claude/**",
   ]),
 ]);
 

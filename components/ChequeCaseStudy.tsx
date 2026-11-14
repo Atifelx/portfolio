@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { X } from "lucide-react";
 import clsx from "clsx";
+import CaseStudyModal, { Bullets, Section } from "./CaseStudyModal";
 
 const models = [
   { role: "Printed text", base: "EasyOCR (CRAFT detector + english_g2 recogniser)", file: "craft_mlt_25k.pth + english_g2.pth", size: "79 MB + 14 MB", done: "Used as is" },
@@ -27,23 +25,6 @@ const doneStyle: Record<string, string> = {
   "Calibrated": "text-outcome border-outcome/40 bg-outcome/5",
   "Benchmark only": "text-ink-3 border-rule",
 };
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="border-t border-rule py-8 first:border-t-0">
-      <h3 className="mb-4 text-xl font-semibold tracking-tight md:text-2xl">{title}</h3>
-      {children}
-    </section>
-  );
-}
-
-function Bullets({ items }: { items: React.ReactNode[] }) {
-  return (
-    <ul className="list-disc space-y-2 pl-5 leading-relaxed text-ink-2 marker:text-ink-3">
-      {items.map((item, i) => <li key={i}>{item}</li>)}
-    </ul>
-  );
-}
 
 function Journey({ label, from, to, note }: { label: string; from: string; to: string; note: string }) {
   return (
@@ -211,63 +192,13 @@ function CaseStudy() {
 }
 
 export default function ChequeCaseStudy({ className }: { className?: string }) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
   return (
-    <>
-      <button type="button" onClick={() => setOpen(true)} className={className}>
-        Read the case study
-      </button>
-
-      {open && createPortal(
-        <div
-          className="fixed inset-0 z-[100] flex items-stretch justify-center bg-ink/60 md:items-center md:p-6"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="case-study-title"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="relative max-h-full w-full max-w-4xl overflow-y-auto overscroll-contain bg-paper shadow-2xl md:rounded-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-rule bg-paper px-5 py-5 md:px-10">
-              <div>
-                <p className="text-sm text-ink-3">Case study</p>
-                <h2 id="case-study-title" className="text-2xl font-bold tracking-tight md:text-3xl">Cheque verification AI</h2>
-                <p className="text-sm text-ink-3">Project ICiCI-pixel</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                aria-label="Close case study"
-                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-rule text-ink transition-colors hover:border-ink"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="px-5 pb-8 md:px-10">
-              <CaseStudy />
-              <p className="border-t border-rule pt-6 text-sm leading-relaxed text-ink-3">
-                Portfolio research prototype built on synthetic test data. Not affiliated with ICICI Bank and not for payment decisions.
-              </p>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
-    </>
+    <CaseStudyModal
+      title="Cheque verification AI"
+      className={className}
+      footer="Portfolio research prototype built on synthetic test data. Not affiliated with any bank and not for payment decisions."
+    >
+      <CaseStudy />
+    </CaseStudyModal>
   );
 }

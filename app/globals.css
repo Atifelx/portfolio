@@ -52,69 +52,12 @@
   animation-delay: var(--delay, 0ms);
 }
 
-/* "Worked with" orbit: the ring turns slowly and each logo turns back the other way, so it stays upright */
-@keyframes orbit-turn {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.orbit {
-  --size: min(320px, calc(100vw - 48px));
-  --badge-w: calc(var(--size) * 0.325);
-  --badge-h: calc(var(--badge-w) / 2);
-  --radius: calc((var(--size) - var(--badge-w)) / 2);
-  position: relative;
-  width: var(--size);
-  height: var(--size);
-}
-
-@media (min-width: 1024px) {
-  .orbit {
-    --size: 420px;
-    --badge-w: 140px;
-    --badge-h: 70px;
-  }
-}
-
-.orbit-ring {
-  position: absolute;
-  inset: 0;
-  animation: orbit-turn 60s linear infinite;
-}
-
-.orbit-slot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: var(--badge-w);
-  height: var(--badge-h);
-  margin: calc(var(--badge-h) / -2) 0 0 calc(var(--badge-w) / -2);
-  transform: rotate(var(--angle)) translateX(var(--radius)) rotate(calc(var(--angle) * -1));
-}
-
-.orbit-badge {
-  width: 100%;
-  height: 100%;
-  animation: orbit-turn 60s linear infinite reverse;
-}
-
-.orbit:hover .orbit-ring,
-.orbit:hover .orbit-badge {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .rise {
-    animation: none;
-  }
-
-  .orbit-ring,
-  .orbit-badge {
     animation: none;
   }
 }

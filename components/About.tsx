@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { REMOTE } from "@/lib/profile";
 
 type Lane = {
@@ -10,60 +9,74 @@ type Lane = {
   more: string[];
 };
 
-// Skills grouped by the three roles Atif targets; every keyword is backed by the resume or a project on this site
+// Skills grouped by the work Atif is hired for; every keyword is backed by the public resume or a project on this site
 const lanes: Lane[] = [
   {
     title: "Forward deployed engineering",
-    proof: "10+ years working directly with enterprise customers; lead developer for Procter & Gamble.",
+    proof: "10+ years working directly with enterprise customers; took a Fortune 500 client's agentic RAG assistant from demo to production.",
     accent: "#2f54eb",
     ink: "#2440c6",
-    core: ["Customer discovery", "Solution design", "Production ownership", "Enterprise integration"],
+    core: ["Customer-facing delivery", "Demo to production", "Enterprise integration"],
     more: [
-      "Rapid prototyping",
-      "Proofs of concept and demos",
-      "Stakeholder management",
-      "Live troubleshooting with customer IT",
+      "Business rules to agent behavior",
+      "Live diagnosis with customer IT",
       "SEV-A incident response",
-      "99.5% SLA ownership",
-      "Remote delivery across US and EU hours",
+      "99.5% SLA",
+      "Team lead",
+      "Remote delivery since 2019",
+    ],
+  },
+  {
+    title: "Cloud & DevOps",
+    proof: "WriteBookAI runs in production on Google Cloud, with CI/CD, health checks and automatic rollback.",
+    accent: "#c2410c",
+    ink: "#b23a0b",
+    core: ["Google Cloud", "Docker", "CI/CD"],
+    more: [
+      "Compute Engine",
+      "Cloud Build",
+      "Artifact Registry",
+      "Secret Manager",
+      "Identity-Aware Proxy",
+      "Cloud Monitoring",
+      "Cloud Logging",
+      "Firebase Hosting",
+      "Azure",
+      "Load testing",
     ],
   },
   {
     title: "AI engineering",
-    proof: "Four-agent LangGraph system in production on Google Vertex AI; intent and JSON-mapping accuracy raised from 67% to 92%.",
+    proof: "Built the fourth agent and completed the orchestration of a production four-agent LangGraph assistant on Google Vertex AI.",
     accent: "#0f7a55",
     ink: "#0f7a55",
-    core: ["AI agents", "Multi-agent systems", "LangGraph", "RAG", "MCP"],
+    core: ["AI agents", "LangGraph", "RAG", "MCP", "Model routing & fallback"],
     more: [
-      "LLM applications",
+      "Multi-agent systems",
       "Tool calling",
-      "Prompt engineering",
-      "Evals and tracing (Arize Phoenix)",
+      "Structured JSON outputs",
       "Google Vertex AI",
-      "Gemini",
-      "OpenAI",
-      "Claude",
-      "Azure OpenAI",
+      "Azure AI Foundry",
       "Azure AI Search",
-      "ChromaDB",
+      "Gemini",
+      "Claude",
+      "OpenAI",
     ],
   },
   {
     title: "Machine learning",
-    proof: "LoRA lifted severity accuracy from 7% to 89%; full fine-tuning took handwriting reads from 1/17 to 16/17.",
+    proof: "LoRA took severity accuracy from ~20% (best prompting) to 89%; full fine-tuning took handwriting reads from 1/17 to 16/17.",
     accent: "#6d28d9",
     ink: "#6d28d9",
-    core: ["Fine-tuning", "LoRA / PEFT", "PyTorch", "Hugging Face Transformers"],
+    core: ["Fine-tuning", "LoRA / PEFT", "PyTorch", "Hugging Face"],
     more: [
       "Full fine-tuning",
-      "Small language models (Gemma, Llama, Mistral)",
-      "Computer vision",
-      "OCR (TrOCR)",
-      "Object detection (YOLO)",
-      "Dataset curation",
-      "Synthetic data",
-      "Model evaluation",
-      "Failure-mode analysis",
+      "Gemma",
+      "TrOCR",
+      "YOLO",
+      "Held-out test sets",
+      "Model comparison",
+      "Error analysis",
     ],
   },
 ];
@@ -72,29 +85,24 @@ const foundation = [
   "Python",
   "TypeScript",
   "Node.js",
+  "Express",
   "React",
   "Next.js",
   "FastAPI",
-  "REST",
-  "WebSockets",
-  "PostgreSQL",
   "MongoDB",
+  "PostgreSQL",
   "Redis",
-  "Docker",
-  "Google Cloud",
-  "Azure",
   "Microsoft Graph API",
-  "OAuth2 / JWT",
   "ServiceNow",
   "Jira",
-  "Stripe",
-  "n8n",
+  "OAuth2",
 ];
 
 const facts = [
   { label: "Remote setup", value: `India (IST). ${REMOTE.hours}.` },
   { label: "Work authorization", value: `${REMOTE.visa}. ${REMOTE.relocation}.` },
-  { label: "Open to", value: "Remote forward deployed, AI engineer and applied ML roles with US and European teams; contract (B2B) or full-time" },
+  { label: "Open to", value: `Remote Forward Deployed Engineer and AI engineer roles worldwide. ${REMOTE.hire}` },
+  { label: "Recognition", value: "Etisalat Monthly Excellence Award, January 2019" },
   { label: "Education", value: "B.E. Electronics and Communication, Visvesvaraya Technological University. MBA, Sikkim Manipal University" },
 ];
 
@@ -107,14 +115,16 @@ export default function About() {
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">About</h2>
             <div className="mt-6 max-w-[62ch] space-y-5 text-lg leading-relaxed text-ink-2">
               <p>
-                I&apos;m a full-stack engineer who moved into AI agents and machine learning. I work the way a forward
-                deployed engineer does: sit with the customer, turn a messy problem into working software, and own it in
-                production.
+                I&apos;m a Forward Deployed Engineer: a full-stack developer who ships AI to production on the cloud,
+                working directly with enterprise customers. I sit with the customer, find the real problem, and see the
+                fix into production.
               </p>
               <p>
                 I started on the client side, six years at Etisalat in Dubai between enterprise customers and engineering
-                teams. Since 2019 I&apos;ve been a hands-on engineer, and today I lead development of a multi-agent
-                assistant for Procter &amp; Gamble.
+                teams. Since 2019 I&apos;ve built software for clients as an independent engineer and led customer-facing
+                Microsoft 365 work for Sherweb. Today I&apos;m a senior software engineer at LTIMindtree, shipping an
+                agentic RAG assistant to production for a Fortune 500 consumer-goods client. I also run WriteBookAI, my
+                own product, in production on Google Cloud.
               </p>
             </div>
           </div>
@@ -135,7 +145,7 @@ export default function About() {
             <p className="text-ink-3">Grouped by the work I&apos;m hired for. Highlighted tags are the core of each.</p>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
             {lanes.map((lane) => (
               <article key={lane.title} className="relative overflow-hidden rounded-2xl border border-rule bg-paper p-6">
                 <span className="absolute inset-x-0 top-0 h-1" style={{ background: lane.accent }} aria-hidden />
@@ -164,8 +174,8 @@ export default function About() {
           </div>
 
           <div className="mt-5 rounded-2xl border border-rule bg-surface p-6">
-            <h4 className="font-semibold">Full-stack and cloud foundation</h4>
-            <ul className="mt-3 flex flex-wrap gap-2" aria-label="Full-stack and cloud skills">
+            <h4 className="font-semibold">Full-stack and integrations</h4>
+            <ul className="mt-3 flex flex-wrap gap-2" aria-label="Full-stack and integration skills">
               {foundation.map((skill) => (
                 <li key={skill} className="rounded-full border border-rule bg-paper px-3 py-1 text-sm text-ink-2">
                   {skill}
@@ -173,30 +183,6 @@ export default function About() {
               ))}
             </ul>
           </div>
-        </div>
-
-        <div className="mt-20 grid grid-cols-1 items-center gap-8 border-t border-rule pt-10 md:mt-24 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-5">
-            <h3 className="text-xl font-semibold tracking-tight">Recognition</h3>
-            <p className="mt-3 text-lg leading-relaxed text-ink-2">
-              Etisalat Monthly Excellence Award for exemplary, customer-centric performance, January 2019.
-            </p>
-          </div>
-          <a
-            href="/etisalat-excellence-award.jpg"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block overflow-hidden rounded-xl border border-rule transition-shadow hover:shadow-lg md:col-span-7"
-          >
-            <Image
-              src="/etisalat-excellence-award.jpg"
-              alt="Etisalat Monthly Excellence Award presented to Atif Shaikh, January 2019"
-              width={1100}
-              height={774}
-              sizes="(max-width: 768px) 100vw, 55vw"
-              className="h-auto w-full"
-            />
-          </a>
         </div>
       </div>
     </section>

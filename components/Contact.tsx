@@ -8,7 +8,7 @@ export default function Contact() {
           Hiring a forward deployed or AI engineer?
         </h2>
         <p className="mt-6 max-w-[56ch] text-xl leading-snug text-white/75">
-          I work remotely with teams in the US and Europe. Tell me about the problem and the team; a short call is
+          I work remotely with teams worldwide. Tell me about the problem and the team; a short call is
           the quickest way to see if I&apos;m the right fit.
         </p>
 

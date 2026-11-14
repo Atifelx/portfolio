@@ -33,17 +33,17 @@ export default function OpengraphImage() {
             }}
           >
             <div style={{ width: 16, height: 16, background: "#0f7a55", borderRadius: 8, marginRight: 14 }} />
-            Open to remote roles in the US and Europe
+            Open to remote roles worldwide
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 128, lineHeight: 1, letterSpacing: -5 }}>Atif Shaikh</div>
           <div style={{ fontSize: 46, lineHeight: 1.15, marginTop: 24, maxWidth: 1000 }}>
-            Forward deployed engineer. Full-stack, AI agents, RAG and fine-tuning.
+            Forward Deployed Engineer. Full-stack developer who ships AI to production on the cloud.
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 28, color: "#5b616e" }}>
-          Lead developer for Procter &amp; Gamble · Remote since 2019 · Indian citizen
+          Working directly with enterprise customers · Remote with clients since 2019
         </div>
       </div>
     ),
